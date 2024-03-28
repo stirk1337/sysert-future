@@ -1,0 +1,6 @@
+services:
+  app:
+    build: .
+    command: python3 src/main.py
+    ports:
+      - "8000:8000"
