@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Pipenv (sysert-future)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Pipenv (sysert-future)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (sysert-future)" project-jdk-type="Python SDK" />
 </project>
