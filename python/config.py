@@ -7,6 +7,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     gigachat: str
+    kandinsky_api_key: str
+    kandinsky_secret_key: str
 
 
 settings = Settings()
