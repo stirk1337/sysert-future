@@ -2,7 +2,6 @@ import asyncio
 import json
 
 import aiohttp
-import httpx
 import requests
 from config import settings
 
