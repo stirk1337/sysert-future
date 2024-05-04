@@ -1,0 +1,29 @@
+@import "./font.scss";
+@import "./navigation.scss";
+@import "./main-block.scss";
+@import "./history-block.scss";
+@import "./idea-block.scss";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: "SysertFont";
+}
+
+section {
+    max-width: 90rem;
+    margin: 0 auto;
+}
+
+h1,
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 37px;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}

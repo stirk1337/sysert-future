@@ -1,0 +1,93 @@
+#history {
+    >p {
+        font-size: 1.875em;
+    }
+
+    .constructor-list-block {
+        padding-top: 126px;
+        padding-bottom: 126px;
+        width: 80%;
+        margin: auto;
+
+        ul {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        h3 {
+            font-size: 1.75em;
+            margin-bottom: 10px;
+            font-weight: normal !important;
+        }
+
+        p {
+            font-size: 1em;
+        }
+    }
+
+    .history-card {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(90deg, #49929F 0% 50%, #313131 50% 100%);
+        border-top-left-radius: 10px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 85.79px;
+            height: 120.99px;
+            background-color: white;
+            z-index: 2;
+            border-top-left-radius: 55px;
+            transform: rotate(-195deg);
+            top: 27.2px;
+            left: -70px;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 85.79px;
+            height: 120.99px;
+            background-color: white;
+            z-index: 2;
+            border-bottom-right-radius: 55px;
+            transform: scale(1, -1) rotate(-195deg);
+            top: 0;
+            right: -70px;
+        }
+    }
+
+    li {
+        color: white;
+        display: flex;
+        height: 128px;
+        text-align: center;
+        align-items: center;
+
+        .card-info {
+            padding: 0 50px;
+            width: 50%;
+        }
+
+        .card-date {
+            position: relative;
+            width: 50%;
+            font-size: 2em;
+        }
+
+        img {
+            transition: 1s;
+            animation-timing-function: ease-out;
+            position: absolute;
+            width: 100%;
+            height: 180px;
+            left: 100%;
+            top: -120%;
+        }
+
+        &:hover img {
+            left: 0;
+        }
+    }
+}
