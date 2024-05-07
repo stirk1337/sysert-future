@@ -14,3 +14,8 @@ type ideaCardType = {
     img: string;
     likes: number;
 }
+
+type Idea = {
+    data: string;
+    image: string;
+}
