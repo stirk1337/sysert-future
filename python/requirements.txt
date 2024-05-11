@@ -7,3 +7,4 @@ gigachat==0.1.23
 drf-yasg==1.21.7
 gunicorn==21.2.0
 pillow==10.3.0
+django-cors-headers==4.3.1

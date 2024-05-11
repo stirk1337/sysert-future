@@ -29,9 +29,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG_VALUE") == 'TRUE'
 
 ALLOWED_HOSTS = ["*"]
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = ['*']
 CSRF_TRUSTED_ORIGINS = ["https://sysert-ai.ru"]
 # Application definition
 
@@ -45,6 +42,7 @@ INSTALLED_APPS = [
     "app",
     "rest_framework",
     "drf_yasg",
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -55,9 +53,15 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = "config.urls"
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+]
 
 TEMPLATES = [
     {
