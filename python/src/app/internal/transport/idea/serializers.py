@@ -25,10 +25,10 @@ class IdeaSerializer(serializers.ModelSerializer):
 
 
 class IdeaGenerationSerializer(serializers.Serializer):
-    like = serializers.CharField(max_length=100, default="Green spaces")
-    want = serializers.CharField(max_length=100, default="Reduce traffic congestion")
+    like = serializers.CharField(max_length=500, default="Green spaces")
+    want = serializers.CharField(max_length=500, default="Reduce traffic congestion")
     can = serializers.CharField(
-        max_length=100, default="Implement smart traffic management systems"
+        max_length=500, default="Implement smart traffic management systems"
     )
 
 
