@@ -80,7 +80,7 @@ function GenerateIdeaBlock() {
                 <input autoComplete="off" id="want" name="want" value={want} onChange={handleWant}></input>
                 <label htmlFor="can">Что ты умеешь?</label>
                 <input autoComplete="off" id="can" name="can" value={can} onChange={handleCan}></input>
-                {error && <p className="error">Поля не должны быть пустыми и не привышать 500 символов</p>}
+                {error && <p className="error">Поля не должны быть пустыми и не должны превышать 500 символов.</p>}
                 {!isLoading && <button type="submit">Сгенерировать идею</button>}
             </form>
             {isLoading &&
