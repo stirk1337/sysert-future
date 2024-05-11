@@ -69,4 +69,4 @@ class PictureGenerationView(APIView):
         if images is None:
             return Response({"error": "Failed to generate image"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response({"images": images}, status=status.HTTP_200_OK)
+        return Response({"image": images[0]}, status=status.HTTP_200_OK)
