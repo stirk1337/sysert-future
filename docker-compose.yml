@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfiles/Dockerfile_Python
     command: sh -c "python3 python/src/manage.py migrate && 
                     python3 python/src/manage.py collectstatic --noinput &&
-                    python3 python/src/manage.py runserver 0.0.0.0:${PORT}"
+                    gunicorn config.wsgi:application --bind 0.0.0.0:${PORT} -w 7"
     ports:
       - "8000:8000"
     volumes:

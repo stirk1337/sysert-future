@@ -5,3 +5,5 @@ langchain==0.1.16
 psycopg2==2.9.9
 gigachat==0.1.23
 drf-yasg==1.21.7
+gunicorn==21.2.0
+pillow==10.3.0
