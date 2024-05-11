@@ -1,0 +1,16 @@
+services:
+  db:
+    image: "postgres:16-bullseye"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: "always"
+
+
+volumes:
+  db_data:
