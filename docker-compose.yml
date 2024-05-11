@@ -3,14 +3,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfiles/Dockerfile_Python
-    command: sh -c "python3 python/src/manage.py migrate && 
-                    python3 python/src/manage.py collectstatic --noinput &&
+    command: sh -c "cd python/src && 
+                    python3 manage.py migrate && 
+                    python3 manage.py collectstatic --noinput &&
                     gunicorn config.wsgi:application --bind 0.0.0.0:${PORT} -w 7"
     ports:
       - "8000:8000"
     volumes:
       - static_volume:/app/python/src/static/
-
 
   db:
     image: "postgres:16-bullseye"
@@ -32,7 +32,7 @@ services:
   nginx:
     image: "nginx:stable-alpine3.17-slim"
     ports:
-      - "80:80"
+      - "81:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - static_volume:/app/python/src/static/
