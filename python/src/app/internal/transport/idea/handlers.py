@@ -78,11 +78,11 @@ class PictureGenerationView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-        images = api.check_generation(request_id)
-        if images is None:
+        image = api.check_generation(request_id)
+        if image is None:
             return Response(
                 {"error": "Failed to generate image"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-        return Response({"image": images[0]}, status=status.HTTP_200_OK)
+        return Response({"image": image}, status=status.HTTP_200_OK)
