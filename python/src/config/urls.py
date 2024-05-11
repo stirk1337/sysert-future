@@ -28,12 +28,18 @@ schema_view = get_schema_view(
     generator_class=BothHttpAndHttpsSchemaGenerator,
 )
 
-urlpatterns = [
-    path(
-        "api/swagger/",
-        schema_view.with_ui("swagger", cache_timeout=0),
-        name="schema-swagger-ui",
-    ),
-    path("api/", include("app.internal.urls")),
-    path("api/admin/", admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns = [
+        path(
+            "api/swagger/",
+            schema_view.with_ui("swagger", cache_timeout=0),
+            name="schema-swagger-ui",
+        ),
+        path("api/", include("app.internal.urls")),
+        path("api/admin/", admin.site.urls),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns = [
+                      path("api/", include("app.internal.urls")),
+                      path("api/admin/", admin.site.urls),
+                  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
