@@ -11,6 +11,8 @@
     text-decoration: none;
     list-style-type: none;
     font-family: "SysertFont";
+    -webkit-font-smoothing: antialiased;
+    -moz-ox-font-smoothing: grayscale;
 }
 
 section,
@@ -49,5 +51,17 @@ form {
     button {
         font-size: 0.6em;
         padding: 10px;
+        margin-bottom: 20px;
     }
+}
+
+#generate-idea div[role=progressbar] {
+    display: block !important;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#generate-idea img {
+    margin-top: 20px;
 }
