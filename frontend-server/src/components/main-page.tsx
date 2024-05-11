@@ -7,11 +7,11 @@ import MainBlock from "./main-block"
 function MainPage() {
     return (
         <>
-            <Header />
+            <header className="sou">
+                <img src="fav-icon.png" width={230} height={230}></img>
+                <h1>Сгенерируй идею мечты</h1>
+            </header>
             <main>
-                <MainBlock />
-                <HistoryBlock />
-                <IdeasBlock />
                 <GenerateIdeaBlock />
             </main>
         </>

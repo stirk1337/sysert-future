@@ -77,7 +77,7 @@ function GenerateIdeaBlock() {
             {isLoading &&
                 <>
                     <p>Ваша идея создаётся</p>
-                    <ProgressBar completed={progress} customLabel=" " bgColor="black" transitionTimingFunction={'linear'} />
+                    <ProgressBar completed={progress} customLabel=" " bgColor="#c1ed32" transitionTimingFunction={'linear'} />
                 </>}
             {!isLoading && ideaData.image !== '' && <div className="generate-result">
                 <p>{ideaData.data}</p>
