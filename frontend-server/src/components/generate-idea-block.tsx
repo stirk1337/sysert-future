@@ -56,7 +56,7 @@ function GenerateIdeaBlock() {
             can: can
         }
 
-        if (like.length === 0 || want.length === 0 || can.length === 0) {
+        if (like.length === 0 || want.length === 0 || can.length === 0 || like.length > 500 || want.length > 500 || can.length > 500) {
             setError(true)
             return
         }
@@ -80,7 +80,7 @@ function GenerateIdeaBlock() {
                 <input autoComplete="off" id="want" name="want" value={want} onChange={handleWant}></input>
                 <label htmlFor="can">Что ты умеешь?</label>
                 <input autoComplete="off" id="can" name="can" value={can} onChange={handleCan}></input>
-                {error && <p className="error">Поля не должны быть пустыми</p>}
+                {error && <p className="error">Поля не должны быть пустыми и не привышать 500 символов</p>}
                 {!isLoading && <button type="submit">Сгенерировать идею</button>}
             </form>
             {isLoading &&
