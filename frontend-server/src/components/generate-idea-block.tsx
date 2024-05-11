@@ -1,6 +1,7 @@
-import { ChangeEvent, SyntheticEvent, useState } from "react"
-import { generateIdea } from "./store/api-actions/get-actions"
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react"
+import { generateIdea } from "./store/api-actions/post-actions"
 import { useAppDispatch, useAppSelector } from "./hooks"
+import ProgressBar from "@ramonak/react-progress-bar"
 
 function GenerateIdeaBlock() {
     const dispatch = useAppDispatch()
@@ -11,6 +12,26 @@ function GenerateIdeaBlock() {
     const [like, setLike] = useState('')
     const [want, setWant] = useState('')
     const [can, setCan] = useState('')
+    const [progress, setProgress] = useState(0)
+    const [intervalId, setIntervalId] = useState(0);
+
+
+    useEffect(() => {
+        let id = 0
+        const incrementProgress = () => {
+            setProgress(prevProgress => prevProgress + 1)
+        }
+
+        if (isLoading && progress <= 98) {
+            id = setInterval(incrementProgress, 250)
+            setIntervalId(id)
+        }
+        else {
+            clearInterval(intervalId)
+        }
+
+        return () => clearInterval(id)
+    }, [progress, isLoading])
 
     function handleLike(evt: ChangeEvent<HTMLInputElement>) {
         setLike(evt.target.value)
@@ -31,23 +52,34 @@ function GenerateIdeaBlock() {
             want: want,
             can: can
         }
-        dispatch(generateIdea(data))
+
+        if (!intervalId) {
+            setProgress(0)
+        }
+
+        dispatch(generateIdea(data)).then(() => {
+            clearInterval(intervalId)
+            setProgress(0)
+        })
     }
 
     return (
         <section id="generate-idea">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="like">Что тебе нравится?</label>
-                <input id="like" name="like" value={like} onChange={handleLike}></input>
+                <input autoComplete="off" id="like" name="like" value={like} onChange={handleLike}></input>
                 <label htmlFor="want">Что тебе хотелось бы сделать?</label>
-                <input id="want" name="want" value={want} onChange={handleWant}></input>
+                <input autoComplete="off" id="want" name="want" value={want} onChange={handleWant}></input>
                 <label htmlFor="can">Что ты умеешь?</label>
-                <input id="can" name="can" value={can} onChange={handleCan}></input>
+                <input autoComplete="off" id="can" name="can" value={can} onChange={handleCan}></input>
                 {!isLoading && <button type="submit">Сгенерировать идею</button>}
             </form>
-            {isLoading && <><p>Ваша идея создаётся</p><img src="loading.gif"></img></>}
+            {isLoading &&
+                <>
+                    <p>Ваша идея создаётся</p>
+                    <ProgressBar completed={progress} customLabel=" " bgColor="black" transitionTimingFunction={'linear'} />
+                </>}
             {!isLoading && ideaData.image !== '' && <div className="generate-result">
-                <p>Готовая идея</p>
                 <p>{ideaData.data}</p>
                 <img src={ideaData.image}></img>
             </div>}

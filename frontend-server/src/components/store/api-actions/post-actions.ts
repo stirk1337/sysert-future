@@ -12,12 +12,13 @@ export const generateIdea = createAsyncThunk<void, { like: string, want: string,
     async (data, { dispatch, extra: api }) => {
         try {
             dispatch(setIdeaLoad(true))
-            const { data: idea } = await api.get('/generate_idea', { params: { like: data.like, want: data.want, can: data.can } });
-            const { data: image } = await api.get('/generate_picture', { params: { prompt: idea } });
+            const { data: idea } = await api.post('/generate_idea/', { like: data.like, want: data.want, can: data.can });
+
+            const { data: image } = await api.post('/generate_picture/', { prompt: idea });
             dispatch(setIdeaLoad(false))
             const ideaData = {
-                data: idea,
-                image: `data:image/png;base64,${image}`
+                data: idea.idea,
+                image: `data:image/png;base64,${image.image}`
             }
             dispatch(setIdea(ideaData));
         } catch (error) {
