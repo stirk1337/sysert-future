@@ -9,4 +9,7 @@ class SiteConfigurationAdmin(ModelAdmin):
     list_display = ["gigachat_prompt"]
 
 
-config = SiteConfiguration.get_solo()
+try:
+    config = SiteConfiguration.get_solo()
+except:
+    pass
