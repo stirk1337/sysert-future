@@ -23,7 +23,8 @@ export const generateIdea = createAsyncThunk<void, { like: string, want: string,
             await api.post('/idea/', { tags: [1], title: ideaData.data, description: "заглушка", image: ideaData.image.split(',')[1] });
             dispatch(setIdea(ideaData));
         } catch (error) {
-            console.log(error);
+            dispatch(setIdeaLoad(false));
+            alert('Произошла ошибка попроуйте снова');
         }
     },
 );

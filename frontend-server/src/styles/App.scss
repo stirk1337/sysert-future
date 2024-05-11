@@ -15,6 +15,7 @@
     -moz-ox-font-smoothing: grayscale;
 }
 
+
 section,
 form {
     max-width: 90rem;
@@ -63,6 +64,12 @@ form {
         padding: 20px 60px;
         cursor: pointer;
     }
+
+    @media(max-width: 1000px) {
+        input {
+            width: 90%;
+        }
+    }
 }
 
 #generate-idea div[role=progressbar] {
@@ -86,6 +93,15 @@ form {
     }
 
     text-align: center;
+
+    @media(max-width: 1000px) {
+        img {
+            position: static;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+    }
 }
 
 .generate-result {
@@ -95,4 +111,19 @@ form {
     p {
         font-family: Arial;
     }
+
+    img {
+        width: 100%;
+    }
+
+    @media(max-width: 1000px) {
+        width: 90%;
+    }
+}
+
+
+.error {
+    color: red;
+    font-family: Arial;
+    margin-bottom: 20px;
 }
