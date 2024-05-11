@@ -30,8 +30,16 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG_VALUE") == "TRUE"
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://sysert-ai.ru", "http://localhost:80", "http://localhost:81"]
+CSRF_TRUSTED_ORIGINS = ["https://sysert-ai.ru",
+                        "http://localhost:80",
+                        "http://localhost:81"]
 # Application definition
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}
 
 INSTALLED_APPS = [
     "django.contrib.admin",
