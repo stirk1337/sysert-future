@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG_VALUE") == 'TRUE'
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = ["https://sysert-ai.ru"]
 # Application definition
 
 INSTALLED_APPS = [
