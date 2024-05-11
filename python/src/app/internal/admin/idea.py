@@ -1,8 +1,7 @@
+from app.internal.models.idea import Idea, IdeaTag, Tag
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from django.utils.html import format_html
-
-from app.internal.models.idea import Idea, Tag, IdeaTag
 
 
 class IdeaTagInline(admin.TabularInline):
@@ -14,7 +13,7 @@ class IdeaAdmin(admin.ModelAdmin):
     inlines = [
         IdeaTagInline,
     ]
-    exclude = ('tags',)
+    exclude = ("tags",)
 
     def tags_list(self, obj):
         return ", ".join([tag.title for tag in obj.tags.all()])
@@ -24,7 +23,7 @@ class IdeaAdmin(admin.ModelAdmin):
     def image_tag(self, obj):
         return format_html(f'<img src="{obj.image} height=500" width=200/>')
 
-    image_tag.short_description = 'Картинка'
+    image_tag.short_description = "Картинка"
 
     list_display = ["pk", "title", "description", "image", "tags_list", "image_tag"]
 

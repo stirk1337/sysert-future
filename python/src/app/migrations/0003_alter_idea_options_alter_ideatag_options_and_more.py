@@ -5,57 +5,66 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app', '0002_idea_tag_ideatag_idea_tags'),
+        ("app", "0002_idea_tag_ideatag_idea_tags"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='idea',
-            options={'verbose_name': 'Идея', 'verbose_name_plural': 'Идеи'},
+            name="idea",
+            options={"verbose_name": "Идея", "verbose_name_plural": "Идеи"},
         ),
         migrations.AlterModelOptions(
-            name='ideatag',
-            options={'verbose_name': 'Тег идее', 'verbose_name_plural': 'Теги идей'},
+            name="ideatag",
+            options={"verbose_name": "Тег идее", "verbose_name_plural": "Теги идей"},
         ),
         migrations.AlterModelOptions(
-            name='tag',
-            options={'verbose_name': 'Тег', 'verbose_name_plural': 'Теги'},
+            name="tag",
+            options={"verbose_name": "Тег", "verbose_name_plural": "Теги"},
         ),
         migrations.AlterField(
-            model_name='idea',
-            name='description',
-            field=models.CharField(max_length=500, verbose_name='Описание'),
+            model_name="idea",
+            name="description",
+            field=models.CharField(max_length=500, verbose_name="Описание"),
         ),
         migrations.AlterField(
-            model_name='idea',
-            name='image_url',
-            field=models.CharField(max_length=1000, verbose_name='Ссылка на картинку'),
+            model_name="idea",
+            name="image_url",
+            field=models.CharField(max_length=1000, verbose_name="Ссылка на картинку"),
         ),
         migrations.AlterField(
-            model_name='idea',
-            name='tags',
-            field=models.ManyToManyField(through='app.IdeaTag', to='app.tag', verbose_name='Теги'),
+            model_name="idea",
+            name="tags",
+            field=models.ManyToManyField(
+                through="app.IdeaTag", to="app.tag", verbose_name="Теги"
+            ),
         ),
         migrations.AlterField(
-            model_name='idea',
-            name='title',
-            field=models.CharField(max_length=100, verbose_name='Заголовок'),
+            model_name="idea",
+            name="title",
+            field=models.CharField(max_length=100, verbose_name="Заголовок"),
         ),
         migrations.AlterField(
-            model_name='ideatag',
-            name='idea',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.idea', verbose_name='Идея'),
+            model_name="ideatag",
+            name="idea",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="app.idea",
+                verbose_name="Идея",
+            ),
         ),
         migrations.AlterField(
-            model_name='ideatag',
-            name='tag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.tag', verbose_name='Тег'),
+            model_name="ideatag",
+            name="tag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="app.tag",
+                verbose_name="Тег",
+            ),
         ),
         migrations.AlterField(
-            model_name='tag',
-            name='title',
-            field=models.CharField(max_length=100, verbose_name='Название'),
+            model_name="tag",
+            name="title",
+            field=models.CharField(max_length=100, verbose_name="Название"),
         ),
     ]

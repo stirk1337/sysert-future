@@ -4,19 +4,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app', '0003_alter_idea_options_alter_ideatag_options_and_more'),
+        ("app", "0003_alter_idea_options_alter_ideatag_options_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='idea',
-            name='image_url',
+            model_name="idea",
+            name="image_url",
         ),
         migrations.AddField(
-            model_name='idea',
-            name='image',
-            field=models.CharField(default='', max_length=1000, verbose_name='Картинка'),
+            model_name="idea",
+            name="image",
+            field=models.CharField(
+                default="", max_length=1000, verbose_name="Картинка"
+            ),
         ),
     ]

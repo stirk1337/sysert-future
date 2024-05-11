@@ -1,11 +1,13 @@
-from django.conf import settings
 import requests
+from django.conf import settings
 
 
 def upload_image(image: str) -> str:
     data = {
-        'image': image,
+        "image": image,
     }
-    response = requests.post(f'https://api.imgbb.com/1/upload?key={settings.IMGBB_API_KEY}', data=data)
+    response = requests.post(
+        f"https://api.imgbb.com/1/upload?key={settings.IMGBB_API_KEY}", data=data
+    )
     data = response.json()
-    return data['data']['url']
+    return data["data"]["url"]
