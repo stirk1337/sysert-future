@@ -35,14 +35,17 @@ function GenerateIdeaBlock() {
 
     function handleLike(evt: ChangeEvent<HTMLInputElement>) {
         setLike(evt.target.value)
+        setError(false)
     }
 
     function handleWant(evt: ChangeEvent<HTMLInputElement>) {
         setWant(evt.target.value)
+        setError(false)
     }
 
     function handleCan(evt: ChangeEvent<HTMLInputElement>) {
         setCan(evt.target.value)
+        setError(false)
     }
 
     function handleSubmit(evt: SyntheticEvent) {
