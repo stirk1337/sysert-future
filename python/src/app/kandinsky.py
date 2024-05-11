@@ -51,7 +51,7 @@ class Text2ImageAPI:
                 image_io = io.BytesIO(image_bytes)
                 image = Image.open(image_io)
 
-                watermark = Image.open("python/src/app/watermark.png")
+                watermark = Image.open("app/watermark.png")
                 watermark.thumbnail((500, 100))
 
                 copied_image = image.copy()

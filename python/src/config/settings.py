@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG_VALUE") == "TRUE"
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://sysert-ai.ru"]
+CSRF_TRUSTED_ORIGINS = ["https://sysert-ai.ru", "http://localhost:80", "http://localhost:81"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -62,6 +62,8 @@ ROOT_URLCONF = "config.urls"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "http://localhost:81",
+    "http://localhost:80",
 ]
 
 TEMPLATES = [
