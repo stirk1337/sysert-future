@@ -4,19 +4,25 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app', '0005_siteconfiguration'),
+        ("app", "0005_siteconfiguration"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='siteconfiguration',
-            options={'verbose_name': 'Настройки сайта', 'verbose_name_plural': 'Настройки сайта'},
+            name="siteconfiguration",
+            options={
+                "verbose_name": "Настройки сайта",
+                "verbose_name_plural": "Настройки сайта",
+            },
         ),
         migrations.AlterField(
-            model_name='siteconfiguration',
-            name='gigachat_prompt',
-            field=models.CharField(default='Напиши конкретную идею по развитию города Сысерть (1 предложение),опираясь на следующие факты: Мне нравится: {}. Я хочу: {}. Я умею: {}', max_length=255, verbose_name='Запрос для Gigachat'),
+            model_name="siteconfiguration",
+            name="gigachat_prompt",
+            field=models.CharField(
+                default="Напиши конкретную идею по развитию города Сысерть (1 предложение),опираясь на следующие факты: Мне нравится: {}. Я хочу: {}. Я умею: {}",
+                max_length=255,
+                verbose_name="Запрос для Gigachat",
+            ),
         ),
     ]

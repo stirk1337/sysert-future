@@ -2,6 +2,7 @@ from app.gchat import generate_idea
 from app.imgbb import upload_image
 from app.internal.models.idea import Idea, Tag
 from app.kandinsky import api
+from app.slang_filter import PymorphyProc
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status
@@ -18,6 +19,13 @@ class IdeaViewSet(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         try:
+            if (
+                PymorphyProc.test(request.data["title"]) > 0
+                or PymorphyProc.test(request.data["description"]) > 0
+            ):
+                return Response(
+                    {"error": "Slang detected"}, status=status.HTTP_400_BAD_REQUEST
+                )
             request.data["image"] = upload_image(request.data["image"])
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

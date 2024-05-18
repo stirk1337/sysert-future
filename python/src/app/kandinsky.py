@@ -3,22 +3,23 @@ import io
 import json
 import time
 
-from PIL import Image
-from django.conf import settings
 import requests
+from django.conf import settings
+from PIL import Image
 
 
 class Text2ImageAPI:
-
     def __init__(self, url, api_key, secret_key):
         self.URL = url
         self.AUTH_HEADERS = {
-            'X-Key': f'Key {api_key}',
-            'X-Secret': f'Secret {secret_key}',
+            "X-Key": f"Key {api_key}",
+            "X-Secret": f"Secret {secret_key}",
         }
-        response = requests.get(self.URL + 'key/api/v1/models', headers=self.AUTH_HEADERS)
+        response = requests.get(
+            self.URL + "key/api/v1/models", headers=self.AUTH_HEADERS
+        )
         data = response.json()
-        self.model_id = data[0]['id']
+        self.model_id = data[0]["id"]
 
     def generate(self, prompt, images=1, width=640, height=360):
         params = {
@@ -26,28 +27,33 @@ class Text2ImageAPI:
             "numImages": images,
             "width": width,
             "height": height,
-            "generateParams": {
-                "query": f"{prompt}"
-            }
+            "generateParams": {"query": f"{prompt}"},
         }
         try:
             data = {
-                'model_id': (None, self.model_id),
-                'params': (None, json.dumps(params), 'application/json')
+                "model_id": (None, self.model_id),
+                "params": (None, json.dumps(params), "application/json"),
             }
-            response = requests.post(self.URL + 'key/api/v1/text2image/run', headers=self.AUTH_HEADERS, files=data)
+            response = requests.post(
+                self.URL + "key/api/v1/text2image/run",
+                headers=self.AUTH_HEADERS,
+                files=data,
+            )
             data = response.json()
-            return data['uuid']
-        except Exception as e:
+            return data["uuid"]
+        except Exception:
             return None
 
     def check_generation(self, request_id, attempts=10, delay=10):
         while attempts > 0:
-            response = requests.get(self.URL + 'key/api/v1/text2image/status/' + request_id, headers=self.AUTH_HEADERS,
-                                    timeout=60)
+            response = requests.get(
+                self.URL + "key/api/v1/text2image/status/" + request_id,
+                headers=self.AUTH_HEADERS,
+                timeout=60,
+            )
             data = response.json()
-            if data['status'] == 'DONE':
-                image_bytes = base64.b64decode(data['images'][0])
+            if data["status"] == "DONE":
+                image_bytes = base64.b64decode(data["images"][0])
                 image_io = io.BytesIO(image_bytes)
                 image = Image.open(image_io)
 
@@ -55,7 +61,7 @@ class Text2ImageAPI:
                 watermark.thumbnail((500, 100))
 
                 copied_image = image.copy()
-                copied_image.paste(watermark, (15, 15), watermark.convert('RGBA'))
+                copied_image.paste(watermark, (15, 15), watermark.convert("RGBA"))
 
                 buffered = io.BytesIO()
                 copied_image.save(buffered, format="PNG")
@@ -67,6 +73,8 @@ class Text2ImageAPI:
             time.sleep(delay)
 
 
-api = Text2ImageAPI('https://api-key.fusionbrain.ai/',
-                    settings.KANDINSKY_API_KEY,
-                    settings.KANDINSKY_SECRET_KEY)
+api = Text2ImageAPI(
+    "https://api-key.fusionbrain.ai/",
+    settings.KANDINSKY_API_KEY,
+    settings.KANDINSKY_SECRET_KEY,
+)

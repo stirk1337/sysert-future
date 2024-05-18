@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app', '0006_alter_siteconfiguration_options_and_more'),
+        ("app", "0006_alter_siteconfiguration_options_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='idea',
-            name='title',
-            field=models.CharField(max_length=500, verbose_name='Заголовок'),
+            model_name="idea",
+            name="title",
+            field=models.CharField(max_length=500, verbose_name="Заголовок"),
         ),
     ]

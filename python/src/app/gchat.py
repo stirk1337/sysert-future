@@ -5,8 +5,11 @@ from langchain.chat_models.gigachat import GigaChat
 chat = GigaChat(credentials=settings.GIGACHAT, verify_ssl_certs=False)
 
 
-def generate_idea(like: str, want: str, can: str) -> str:
+def generate_idea(like: str, want: str, can: str) -> dict[str, str]:
     config = SiteConfiguration.objects.get()
     prompt = config.gigachat_prompt.format(like, want, can)
-    res = chat.invoke(prompt)
-    return res.content
+    description = chat.invoke(prompt).content
+    title = chat.invoke(
+        f"Сгенерируй заголовок (макс 3-4 слова) по описанию: {description}"
+    ).content
+    return {"title": title, "description": description}

@@ -5,7 +5,6 @@ from django.urls import include, path
 from drf_yasg import openapi
 from drf_yasg.generators import OpenAPISchemaGenerator
 from drf_yasg.views import get_schema_view
-from rest_framework import permissions
 
 
 class BothHttpAndHttpsSchemaGenerator(OpenAPISchemaGenerator):
@@ -40,6 +39,6 @@ if settings.DEBUG:
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 else:
     urlpatterns = [
-                      path("api/", include("app.internal.urls")),
-                      path("api/admin/", admin.site.urls),
-                  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+        path("api/", include("app.internal.urls")),
+        path("api/admin/", admin.site.urls),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

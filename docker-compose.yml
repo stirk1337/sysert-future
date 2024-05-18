@@ -6,6 +6,7 @@ services:
     command: sh -c "cd python/src && 
                     python3 manage.py migrate && 
                     python3 manage.py collectstatic --noinput &&
+                    python3 manage.py syncdb &&
                     gunicorn config.wsgi:application --bind 0.0.0.0:${PORT} -w 20 --timeout 120"
     ports:
       - "8000:8000"
@@ -13,17 +14,17 @@ services:
       - static_volume:/app/python/src/static/
     restart: "always"
 
-#  db:
-#    image: "postgres:16-bullseye"
-#    environment:
-#      - POSTGRES_USER=${DB_USER}
-#      - POSTGRES_PASSWORD=${DB_PASS}
-#      - POSTGRES_DB=${DB_NAME}
-#    volumes:
-#      - db_data:/var/lib/postgresql/data
-#    ports:
-#      - "5432:5432"
-#    restart: "always"
+  db:
+    image: "postgres:16-alpine3.18"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: "always"
 
   front:
     build:
