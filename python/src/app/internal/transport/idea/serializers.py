@@ -15,13 +15,11 @@ class TagIdeaSerializer(serializers.ModelSerializer):
 
 
 class IdeaSerializer(serializers.ModelSerializer):
-    tags = serializers.ListField(
-        child=serializers.IntegerField(), write_only=True, required=True
-    )
+    tags = TagSerializer(read_only=True, many=True)
 
     class Meta:
         model = Idea
-        fields = "__all__"
+        fields = ('pk', 'title', 'description', 'image', 'tags')
 
 
 class IdeaGenerationSerializer(serializers.Serializer):

@@ -23,9 +23,7 @@ class IdeaViewSet(generics.ListCreateAPIView):
                 PymorphyProc.test(request.data["title"]) > 0
                 or PymorphyProc.test(request.data["description"]) > 0
             ):
-                return Response(
-                    {"error": "Slang detected"}, status=status.HTTP_400_BAD_REQUEST
-                )
+                raise RuntimeError("Slang detected")
             request.data["image"] = upload_image(request.data["image"])
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
