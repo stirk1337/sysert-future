@@ -3,6 +3,8 @@
 @import "./main-block.scss";
 @import "./history-block.scss";
 @import "./idea-block.scss";
+@import "./generate-idea.scss";
+@import "./footer.scss";
 
 * {
     box-sizing: border-box;
@@ -21,47 +23,61 @@ form {
     margin: 0 auto;
 }
 
+section {
+    margin-top: 126px;
+    margin-bottom: 126px;
+}
+
+#main {
+    margin-top: 0;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: normal;
+}
+
 h1,
 h2 {
     font-size: 2.5em;
     margin-bottom: 37px;
-    font-weight: normal;
+}
+
+input {
+    border: none;
+}
+
+textarea {
+    border: none;
+    resize: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+}
+
+section p {
+    font-size: 1.875rem;
 }
 
 html::-webkit-scrollbar {
     display: none;
 }
 
-#generate-idea {
-    font-size: 1.875em;
-    margin-top: 50px;
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-form {
-    input {
-        font-size: 1em;
-        display: block;
-        width: 50%;
-        margin: 0 auto;
-        margin-bottom: 20px;
-    }
-
-    button {
-        font-size: 0.6em;
-        padding: 10px;
-        margin-bottom: 20px;
-    }
-}
-
-#generate-idea div[role=progressbar] {
-    display: block !important;
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 10px;
-}
-
-#generate-idea img {
-    margin-top: 20px;
+.error {
+    color: red;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
 }

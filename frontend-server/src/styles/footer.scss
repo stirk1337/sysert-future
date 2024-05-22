@@ -1,0 +1,37 @@
+#footer {
+    max-width: 100%;
+    background: #313131;
+    color: white;
+    padding-top: 67px;
+    padding-bottom: 39px;
+    margin-bottom: 0;
+
+    .flex-box {
+        max-width: 110rem;
+        margin: 0 auto;
+        display: flex;
+        gap: 48px;
+        justify-content: center;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 27px;
+    }
+
+    .media {
+        width: 15%;
+    }
+
+    .media p {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        a {
+            font-family: Microsoft Sans Serif !important;
+            border-bottom: 1px solid white;
+        }
+    }
+}

@@ -1,3 +1,4 @@
+import Footer from "./footer"
 import GenerateIdeaBlock from "./generate-idea-block"
 import Header from "./header"
 import HistoryBlock from "./history-block"
@@ -13,6 +14,7 @@ function MainPage() {
                 <HistoryBlock />
                 <IdeasBlock />
                 <GenerateIdeaBlock />
+                <Footer />
             </main>
         </>
     )

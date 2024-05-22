@@ -16,6 +16,19 @@ type ideaCardType = {
 }
 
 type Idea = {
-    data: string;
+    title: string;
+    description: string;
     image: string;
+}
+
+type IdeaData = Omit<Idea, "image">
+
+type Tags = {
+    id: string;
+    title: string;
+    selected: boolean;
+}
+
+type IdeaExchange = Idea & {
+    id: string;
 }

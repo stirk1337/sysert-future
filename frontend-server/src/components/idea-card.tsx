@@ -1,24 +1,27 @@
+import { useAppSelector } from "./hooks";
+
 type IdeaCardProps = {
-    card: ideaCardType;
+    card: IdeaExchange;
     currentCard: number;
 }
 
 function IdeaCard({ card, currentCard }: IdeaCardProps) {
+    const tags = useAppSelector((store) => store.tags)
 
     return (
         <li className={currentCard === Number(card.id) ? 'active' : ''}>
+            {/*<div className="likes-block">
+                <img src="heart.svg"></img>
+                <p>{100}</p>
+            </div>*/}
+            <img className="card-image" src={card.image}></img>
             <div className="idea-info">
-                <h3>{card.name}</h3>
-                <p className="description">{card.description}</p>
-                <ul>
-                    {card.tags.map((tag, index) => <li key={index}>{tag}</li>)}
+                <ul className="idea-tags">
+                    {tags.map((tag, index) => <li key={index}>{tag.title}</li>)}
                 </ul>
-                <div className="likes-block">
-                    <img src="heart.svg"></img>
-                    <p>{card.likes}</p>
-                </div>
+                <h3>{card.title}</h3>
+                <p className="description">{card.description}</p>
             </div>
-            <img src={`/${card.img}.png`} width={369} height={226}></img>
         </li>
     )
 }

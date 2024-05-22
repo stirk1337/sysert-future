@@ -12,6 +12,7 @@ function HistoryCard({ id, index, cardData }: HistoryCardType) {
         <Draggable draggableId={id} index={index}>
             {(provided) => (
                 <li className="history-card" {...provided.draggableProps}  {...provided.dragHandleProps} ref={provided.innerRef}>
+                    <img className="puzzle-part" src={`/history-puzzle/puzzle-${id}.png`}></img>
                     <div className="card-info">
                         <h3>{cardData.name}</h3>
                         <p>{cardData.description}</p>
