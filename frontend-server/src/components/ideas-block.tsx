@@ -1,14 +1,27 @@
-import { useState } from "react"
-import { ideaList } from "../const-data"
+import { useEffect, useState } from "react"
 import IdeaCard from "./idea-card"
+import { useAppDispatch, useAppSelector } from "./hooks"
+import { getIdeas } from "./store/api-actions/get-actions"
 
 function IdeasBlock() {
-    const [currentCard, setCurrentCard] = useState(1)
-    const [blockPositions, setBlockPositions] = useState(10)
+    const dispatch = useAppDispatch()
+    const ideasList = useAppSelector((store) => store.ideas)
+    console.log(ideasList)
+
+    const [currentCard, setCurrentCard] = useState(0)
+    const [blockPositions, setBlockPositions] = useState(-10)
+
+    useEffect(() => {
+        dispatch(getIdeas())
+    }, [])
 
     function changeCurrentCard(step: number) {
+        if (currentCard + step < 0 || currentCard + step > ideasList.length + 3) {
+            return
+        }
         setCurrentCard(currentCard + step)
-        setBlockPositions(blockPositions + (-step * 85))
+        console.log(currentCard)
+        setBlockPositions(blockPositions + (-step * 30))
     }
 
     return (
@@ -21,7 +34,7 @@ function IdeasBlock() {
                     <img onClick={() => { changeCurrentCard(1) }} src="arrow.svg"></img>
                 </div>
                 <ul className="ideas-list" style={{ left: blockPositions + '%' }}>
-                    {ideaList.map(idea => <IdeaCard key={idea.id} card={idea} currentCard={currentCard} />)}
+                    {ideasList.map(idea => <IdeaCard key={idea.id} card={idea} currentCard={currentCard} />)}
                 </ul>
             </div>
         </section>

@@ -1,88 +1,86 @@
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react"
-import { generateIdea } from "./store/api-actions/post-actions"
-import { useAppDispatch, useAppSelector } from "./hooks"
-import ProgressBar from "@ramonak/react-progress-bar"
+import { RefObject, useEffect, useRef, useState } from "react"
+import GenerateForm from "./generate-form"
+import EditForm from "./edit-form"
+import { useAppDispatch } from "./hooks"
+import { getTags } from "./store/api-actions/get-actions"
+import { LoadingStatuses } from "../enums"
 
 function GenerateIdeaBlock() {
     const dispatch = useAppDispatch()
 
-    const ideaData = useAppSelector(store => store.idea)
-    const isLoading = useAppSelector(store => store.ideaIsLoading)
+    const [isEdit, setIsEdit] = useState(false)
+    const [formLabel, setFormLabel] = useState('тебе нравится')
+    const [formHeight, setFormHeight] = useState(70)
+    const [loadingStatus, setLoadingStatus] = useState<LoadingStatuses>(LoadingStatuses.default)
 
-    const [like, setLike] = useState('')
-    const [want, setWant] = useState('')
-    const [can, setCan] = useState('')
-    const [progress, setProgress] = useState(0)
-    const [intervalId, setIntervalId] = useState(0);
+    const elementRef: RefObject<HTMLDivElement> = useRef(null);
+    const scrollToRef: RefObject<HTMLDivElement> = useRef(null);
 
+    function isElementInViewport(scrollToEl: HTMLDivElement, containerEl: HTMLDivElement): boolean {
+        const scrollToRect = scrollToEl.getBoundingClientRect();
+        const containerReact = containerEl.getBoundingClientRect()
+        return (
+            scrollToRect.bottom > (window.innerHeight || document.documentElement.clientHeight) &&
+            containerReact.top <= (window.innerHeight || document.documentElement.clientHeight)
+        );
+    }
 
     useEffect(() => {
-        let id = 0
-        const incrementProgress = () => {
-            setProgress(prevProgress => prevProgress + 1)
+        dispatch(getTags())
+    }, [])
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (scrollToRef.current && elementRef.current && isElementInViewport(scrollToRef.current, elementRef.current)) {
+                scrollToRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+        };
+        handleScroll();
+
+        const resizeObserver = new ResizeObserver(handleScroll);
+        if (elementRef.current) {
+            resizeObserver.observe(elementRef.current);
         }
 
-        if (isLoading && progress <= 98) {
-            id = setInterval(incrementProgress, 250)
-            setIntervalId(id)
-        }
-        else {
-            clearInterval(intervalId)
-        }
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, [])
 
-        return () => clearInterval(id)
-    }, [progress, isLoading])
-
-    function handleLike(evt: ChangeEvent<HTMLInputElement>) {
-        setLike(evt.target.value)
+    function handleLabel(label: string) {
+        setFormLabel(label)
     }
 
-    function handleWant(evt: ChangeEvent<HTMLInputElement>) {
-        setWant(evt.target.value)
+    function changeToggle() {
+        setIsEdit(!isEdit)
     }
 
-    function handleCan(evt: ChangeEvent<HTMLInputElement>) {
-        setCan(evt.target.value)
+    function changeFormHeight(height: number) {
+        setFormHeight(height)
     }
 
-    function handleSubmit(evt: SyntheticEvent) {
-        evt.preventDefault()
-        const data = {
-            like: like,
-            want: want,
-            can: can
-        }
-
-        if (!intervalId) {
-            setProgress(0)
-        }
-
-        dispatch(generateIdea(data)).then(() => {
-            clearInterval(intervalId)
-            setProgress(0)
-        })
+    function changeLoadStatus(status: LoadingStatuses) {
+        setLoadingStatus(status)
     }
 
     return (
-        <section id="generate-idea">
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="like">Что тебе нравится?</label>
-                <input autoComplete="off" id="like" name="like" value={like} onChange={handleLike}></input>
-                <label htmlFor="want">Что тебе хотелось бы сделать?</label>
-                <input autoComplete="off" id="want" name="want" value={want} onChange={handleWant}></input>
-                <label htmlFor="can">Что ты умеешь?</label>
-                <input autoComplete="off" id="can" name="can" value={can} onChange={handleCan}></input>
-                {!isLoading && <button type="submit">Сгенерировать идею</button>}
-            </form>
-            {isLoading &&
-                <>
-                    <p>Ваша идея создаётся</p>
-                    <ProgressBar completed={progress} customLabel=" " bgColor="black" transitionTimingFunction={'linear'} />
-                </>}
-            {!isLoading && ideaData.image !== '' && <div className="generate-result">
-                <p>{ideaData.data}</p>
-                <img src={ideaData.image}></img>
-            </div>}
+        <section ref={elementRef} id="generate-idea">
+            <h2>Генератор идей</h2>
+            <p>Здесь ты можешь создать идею, которая может найти своё будущие в твоих или других руках! Напиши её сам или при помощи нейросетей</p>
+            <div className="generate-form" style={{ "--max-height": `${isEdit ? '960' : formHeight + 200}px` } as React.CSSProperties}>
+                <div className="form-header">
+                    {!isEdit && <h3>Напиши о том, что {formLabel}</h3>}
+                    <div className="form-toggle-block">
+                        <img width={35} height={35} src="/generate-edit-icon.svg"></img>
+                        <button onClick={changeToggle} className="form-toggle">
+                            <div className={`toggle ${isEdit ? 'edit-mode' : 'ai-mode'}`}></div>
+                        </button>
+                        <p>ИИ</p>
+                    </div>
+                </div>
+                {isEdit ? <EditForm loadingStatus={loadingStatus} changeLoadStatus={changeLoadStatus} /> : <GenerateForm setLabel={handleLabel} setHeight={changeFormHeight} setEdit={changeToggle} height={formHeight} />}
+            </div>
+            <div ref={scrollToRef}></div>
         </section>
     )
 }
