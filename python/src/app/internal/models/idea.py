@@ -7,6 +7,13 @@ class Idea(models.Model):
     image = models.CharField(max_length=1000, verbose_name="Картинка", default="")
     tags = models.ManyToManyField("Tag", through="IdeaTag", verbose_name="Теги")
 
+    @property
+    def get_tags(self):
+        if len(self.tags.all()) > 0:
+            return [tag.id for tag in self.tags.all()]
+        else:
+            return []
+
     def __str__(self):
         return self.title
 

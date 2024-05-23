@@ -8,18 +8,15 @@ class TagSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class TagIdeaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = ("pk",)
-
-
 class IdeaSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(read_only=True, many=True)
+    tags = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True, required=True
+    )
+    active_tags = serializers.ReadOnlyField(source='get_tags')
 
     class Meta:
         model = Idea
-        fields = ('pk', 'title', 'description', 'image', 'tags')
+        fields = ('id', 'title', 'description', 'image', 'tags', 'active_tags')
 
 
 class IdeaGenerationSerializer(serializers.Serializer):
