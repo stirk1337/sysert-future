@@ -6,6 +6,8 @@ type IdeaCardProps = {
 }
 
 function IdeaCard({ card, currentCard }: IdeaCardProps) {
+    const tags = useAppSelector((store) => store.tags)
+
     return (
         <li className={currentCard === Number(card.id) ? 'active' : ''}>
             {/*<div className="likes-block">
@@ -15,7 +17,7 @@ function IdeaCard({ card, currentCard }: IdeaCardProps) {
             <img className="card-image" src={card.image}></img>
             <div className="idea-info">
                 <ul className="idea-tags">
-                    {card.tags.map((tag) => <li key={tag.id}>{tag.title}</li>)}
+                    {card.active_tags.map((currentTag) => <li key={currentTag}>{tags.filter((tag) => Number(tag.id) === currentTag)[0].title}</li>)}
                 </ul>
                 <div className="idea-data">
                     <h3>{card.title}</h3>

@@ -53,6 +53,8 @@ function EditForm({ loadingStatus, changeLoadStatus }: EditFormProps) {
         if (tagsData.filter(tag => tag.selected).length > 4 && !tagsData.filter(tag => tag.id === id)[0].selected) {
             return
         }
+        console.log(tagsData)
+        console.log(ideaData.image)
         dispatch(changeTagStatus(id))
         changeLoadStatus(LoadingStatuses.default)
     }

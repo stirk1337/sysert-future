@@ -52,7 +52,13 @@ export const saveIdea = createAsyncThunk<void, { tags: string[], title: string, 
     'idea/generateImage',
     async (data, { dispatch, extra: api }) => {
         try {
-            const { data: idea } = await api.post('/idea/', { title: data.title, description: data.description, image: data.image, tags: data.tags });
+            await api.post('/idea/', { title: data.title, description: data.description, image: data.image, tags: data.tags });
+            const idea: Idea = {
+                title: data.title,
+                description: data.description,
+                image: `data:image/png;base64,${data.image}`
+            }
+            console.log(data.image)
             dispatch(setIdea(idea))
         } catch (error) {
             console.log(error);

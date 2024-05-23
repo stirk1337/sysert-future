@@ -31,5 +31,5 @@ type Tags = {
 
 type IdeaExchange = Idea & {
     id: string;
-    tags: Tags[];
+    active_tags: number[];
 }
