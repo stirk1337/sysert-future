@@ -21,7 +21,11 @@ nav {
 
         li {
             cursor: pointer;
-            padding: 11px;
+
+            a {
+                display: inline-block;
+                padding: 11px;
+            }
 
 
             &:hover {

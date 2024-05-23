@@ -58,11 +58,12 @@
 
                 .card-image {
                     height: 45%;
+                    opacity: 0.7;
                 }
 
                 .idea-info {
                     position: relative;
-                    transform: translateY(-75%);
+                    transform: translateY(-55%);
 
                     .idea-tags {
                         color: white;
@@ -92,7 +93,8 @@
                     flex-wrap: wrap;
                     gap: 8px;
                     margin-bottom: 20px;
-                    height: 70%;
+                    height: 70px;
+                    align-items: flex-start;
 
                     li {
                         padding: 4px 8px;
@@ -100,6 +102,14 @@
                         border: 1px #313131 solid;
                         backdrop-filter: blur(4px);
                     }
+                }
+
+                h3 {
+                    margin-bottom: 40px;
+                }
+
+                .idea-data {
+                    overflow: auto;
                 }
 
                 .description {
