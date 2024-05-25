@@ -7,7 +7,6 @@ type HistoryCardType = {
 }
 
 function HistoryCard({ id, index, cardData }: HistoryCardType) {
-    console.log(id, index, cardData)
     return (
         <Draggable draggableId={id} index={index}>
             {(provided) => (
