@@ -12,6 +12,7 @@ services:
       - "8000:8000"
     volumes:
       - static_volume:/app/python/src/static/
+      - /db_data/db.sqlite3:/python/src/db.sqlite3
     restart: "always"
 
 #  db:
