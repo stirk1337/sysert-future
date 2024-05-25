@@ -6,7 +6,6 @@ import { getIdeas } from "./store/api-actions/get-actions"
 function IdeasBlock() {
     const dispatch = useAppDispatch()
     const ideasList = useAppSelector((store) => store.ideas)
-    console.log(ideasList)
 
     const [currentCard, setCurrentCard] = useState(0)
     const [blockPositions, setBlockPositions] = useState(-10)
@@ -20,7 +19,6 @@ function IdeasBlock() {
             return
         }
         setCurrentCard(currentCard + step)
-        console.log(currentCard)
         setBlockPositions(blockPositions + (-step * 30))
     }
 

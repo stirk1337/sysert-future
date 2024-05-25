@@ -15,7 +15,6 @@ function HistoryBlock() {
         const element = array[source.index]
         array.splice(source.index, 1)
         array.splice(destination.index, 0, element)
-        console.log(array)
         setHistoryCards([...array])
     }
 
