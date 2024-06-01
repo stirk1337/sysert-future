@@ -1,4 +1,4 @@
-from app.internal.models.idea import Idea, IdeaTag, Tag
+from app.internal.models.idea import Idea, IdeaTag, Tag, IdeaLike
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from django.utils.html import format_html
@@ -8,11 +8,13 @@ class IdeaTagInline(admin.TabularInline):
     model = IdeaTag
 
 
+class IdeaLikeInline(admin.TabularInline):
+    model = IdeaLike
+
+
 @admin.register(Idea)
 class IdeaAdmin(admin.ModelAdmin):
-    inlines = [
-        IdeaTagInline,
-    ]
+    inlines = [IdeaTagInline, IdeaLikeInline]
     exclude = ("tags",)
 
     def tags_list(self, obj):
@@ -25,8 +27,31 @@ class IdeaAdmin(admin.ModelAdmin):
 
     image_tag.short_description = "Картинка"
 
-    list_display = ["pk", "title", "description", "image", "tags_list", "image_tag"]
-    search_fields = ["pk", "title", "description", "image", "tags_list", "image_tag"]
+    def likes_len(self, obj):
+        return len(obj.likes.all())
+
+    likes_len.short_description = "Количество лайков"
+
+    list_display = [
+        "pk",
+        "title",
+        "description",
+        "image",
+        "tags_list",
+        "image_tag",
+        "created_by",
+        "likes_len",
+    ]
+    search_fields = [
+        "pk",
+        "title",
+        "description",
+        "image",
+        "tags_list",
+        "image_tag",
+        "created_by",
+        "likes_len",
+    ]
 
 
 @admin.register(Tag)

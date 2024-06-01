@@ -1,4 +1,8 @@
-from app.internal.models.success_detector import SuccessDetector, SuccessDetectorTestItem, TestItem
+from app.internal.models.success_detector import (
+    SuccessDetector,
+    SuccessDetectorTestItem,
+    TestItem,
+)
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 
@@ -24,6 +28,24 @@ class SuccessDetectorAdmin(admin.ModelAdmin):
 
 @admin.register(TestItem)
 class TestItemAdmin(ModelAdmin):
-    search_fields = ["pk", "title", "description", "is_test", "answer1", "answer2", "answer3", "after_test"]
+    search_fields = [
+        "pk",
+        "title",
+        "description",
+        "is_test",
+        "answer1",
+        "answer2",
+        "answer3",
+        "after_test",
+    ]
     list_filter = ["is_test"]
-    list_display = ["pk", "title", "description", "is_test", "answer1", "answer2", "answer3", "after_test"]
+    list_display = [
+        "pk",
+        "title",
+        "description",
+        "is_test",
+        "answer1",
+        "answer2",
+        "answer3",
+        "after_test",
+    ]

@@ -5,4 +5,12 @@ from django.contrib.auth.admin import UserAdmin
 
 @admin.register(AdminUser)
 class AdminUserAdmin(UserAdmin):
-    pass
+    list_display = UserAdmin.list_display + ("cookie", "photo_url")
+    fieldsets = UserAdmin.fieldsets + (
+        (
+            None,
+            {
+                "fields": ("cookie", "photo_url"),
+            },
+        ),
+    )

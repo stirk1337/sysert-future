@@ -1,4 +1,5 @@
-from app.internal.models.idea import Idea, Tag
+from app.internal.models.admin_user import AdminUser
+from app.internal.models.idea import Idea, Tag, IdeaLike
 from rest_framework import serializers
 
 
@@ -8,15 +9,37 @@ class TagSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class IdeaLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IdeaLike
+        fields = ("user", "idea")
+
+
+class IdeaLikeCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdminUser
+        fields = ("id", "username")
+
+
 class IdeaSerializer(serializers.ModelSerializer):
     tags = serializers.ListField(
         child=serializers.IntegerField(), write_only=True, required=True
     )
-    active_tags = serializers.ReadOnlyField(source='get_tags')
+    active_tags = serializers.ReadOnlyField(source="get_tags")
+    likes = IdeaLikeCountSerializer(many=True, read_only=True)
 
     class Meta:
         model = Idea
-        fields = ('id', 'title', 'description', 'image', 'tags', 'active_tags')
+        fields = (
+            "id",
+            "title",
+            "description",
+            "image",
+            "tags",
+            "active_tags",
+            "likes",
+            "created_by",
+        )
 
 
 class IdeaGenerationSerializer(serializers.Serializer):

@@ -4,24 +4,26 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app', '0009_successdetector_testitem_successdetectortestitem_and_more'),
+        ("app", "0009_successdetector_testitem_successdetectortestitem_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='testitem',
-            options={'verbose_name': 'Шаг детектора успеха', 'verbose_name_plural': 'Шаги детектора успеха'},
+            name="testitem",
+            options={
+                "verbose_name": "Шаг детектора успеха",
+                "verbose_name_plural": "Шаги детектора успеха",
+            },
         ),
         migrations.RenameField(
-            model_name='testitem',
-            old_name='after_text',
-            new_name='after_test',
+            model_name="testitem",
+            old_name="after_text",
+            new_name="after_test",
         ),
         migrations.AlterField(
-            model_name='testitem',
-            name='is_test',
-            field=models.BooleanField(default=False, verbose_name='Это тест?'),
+            model_name="testitem",
+            name="is_test",
+            field=models.BooleanField(default=False, verbose_name="Это тест?"),
         ),
     ]

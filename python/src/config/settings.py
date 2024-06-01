@@ -39,7 +39,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
     ]
 }
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "corsheaders",
     "ckeditor",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -110,9 +111,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -163,3 +164,11 @@ GIGACHAT = os.environ.get("GIGACHAT")
 KANDINSKY_SECRET_KEY = os.environ.get("KANDINSKY_SECRET_KEY")
 KANDINSKY_API_KEY = os.environ.get("KANDINSKY_API_KEY")
 IMGBB_API_KEY = os.environ.get("IMGBB_API_KEY")
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
+    },
+}

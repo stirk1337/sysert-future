@@ -2,7 +2,7 @@ Django==5.0.6
 djangorestframework==3.15.1
 python-dotenv==1.0.1
 langchain==0.1.16
-psycopg2==2.9.9
+#psycopg2==2.9.9
 gigachat==0.1.23
 drf-yasg==1.21.7
 gunicorn==21.2.0
@@ -10,3 +10,4 @@ pillow==10.3.0
 django-cors-headers==4.3.1
 django-solo==2.2.0
 pymorphy2==0.8
+django-ckeditor==6.7.1

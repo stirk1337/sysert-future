@@ -5,52 +5,128 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app', '0008_slang'),
+        ("app", "0008_slang"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SuccessDetector',
+            name="SuccessDetector",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=500, verbose_name='Заголовок')),
-                ('description', models.CharField(max_length=500, verbose_name='Описание')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=500, verbose_name="Заголовок")),
+                (
+                    "description",
+                    models.CharField(max_length=500, verbose_name="Описание"),
+                ),
             ],
             options={
-                'verbose_name': 'Блок детектора успеха',
-                'verbose_name_plural': 'Блоки детектора успеха',
+                "verbose_name": "Блок детектора успеха",
+                "verbose_name_plural": "Блоки детектора успеха",
             },
         ),
         migrations.CreateModel(
-            name='TestItem',
+            name="TestItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=500, verbose_name='Заголовок')),
-                ('description', models.TextField(verbose_name='Описание')),
-                ('is_test', models.BooleanField(default=False)),
-                ('answer1', models.CharField(default=None, max_length=100, null=True, verbose_name='Правильный ответ')),
-                ('answer2', models.CharField(default=None, max_length=100, null=True, verbose_name='Неправильный ответ')),
-                ('answer3', models.CharField(default=None, max_length=100, null=True, verbose_name='Неправильный ответ')),
-                ('after_text', models.CharField(default=None, max_length=500, null=True, verbose_name='Текст после теста')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=500, verbose_name="Заголовок")),
+                ("description", models.TextField(verbose_name="Описание")),
+                ("is_test", models.BooleanField(default=False)),
+                (
+                    "answer1",
+                    models.CharField(
+                        default=None,
+                        max_length=100,
+                        null=True,
+                        verbose_name="Правильный ответ",
+                    ),
+                ),
+                (
+                    "answer2",
+                    models.CharField(
+                        default=None,
+                        max_length=100,
+                        null=True,
+                        verbose_name="Неправильный ответ",
+                    ),
+                ),
+                (
+                    "answer3",
+                    models.CharField(
+                        default=None,
+                        max_length=100,
+                        null=True,
+                        verbose_name="Неправильный ответ",
+                    ),
+                ),
+                (
+                    "after_text",
+                    models.CharField(
+                        default=None,
+                        max_length=500,
+                        null=True,
+                        verbose_name="Текст после теста",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='SuccessDetectorTestItem',
+            name="SuccessDetectorTestItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('success_detector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.successdetector', verbose_name='Блок детектора успеха')),
-                ('test_item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.testitem', verbose_name='Шаг детектора успеха')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "success_detector",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="app.successdetector",
+                        verbose_name="Блок детектора успеха",
+                    ),
+                ),
+                (
+                    "test_item",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="app.testitem",
+                        verbose_name="Шаг детектора успеха",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Шаг для детектора успеха',
-                'verbose_name_plural': 'Шаги для детектора успеха',
+                "verbose_name": "Шаг для детектора успеха",
+                "verbose_name_plural": "Шаги для детектора успеха",
             },
         ),
         migrations.AddField(
-            model_name='successdetector',
-            name='items',
-            field=models.ManyToManyField(through='app.SuccessDetectorTestItem', to='app.testitem', verbose_name='Шаг'),
+            model_name="successdetector",
+            name="items",
+            field=models.ManyToManyField(
+                through="app.SuccessDetectorTestItem",
+                to="app.testitem",
+                verbose_name="Шаг",
+            ),
         ),
     ]
