@@ -4,4 +4,5 @@ from django.contrib import admin
 
 @admin.register(Slang)
 class SlangAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["pk", "word"]
+    search_fields = ["pk", "word"]

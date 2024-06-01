@@ -26,8 +26,10 @@ class IdeaAdmin(admin.ModelAdmin):
     image_tag.short_description = "Картинка"
 
     list_display = ["pk", "title", "description", "image", "tags_list", "image_tag"]
+    search_fields = ["pk", "title", "description", "image", "tags_list", "image_tag"]
 
 
 @admin.register(Tag)
 class TagAdmin(ModelAdmin):
     list_display = ["pk", "title"]
+    search_fields = ["pk", "title"]
