@@ -20,8 +20,5 @@ def get_user_by_parameter(parameter: str, value: Any) -> AdminUser | None:
 
 
 def save_cookie_for_user(user: AdminUser, cookie: dict):
-    print(user.cookie)
-    print("COOKIE", cookie)
     user.cookie = cookie
-    print(user.cookie)
     user.save()

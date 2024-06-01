@@ -18,6 +18,7 @@ from .serializers import (
     TagSerializer,
     IdeaLikeSerializer,
 )
+from ...services.idea_service import add_or_remove_like, get_idea_by_parameter
 
 
 @authentication_classes([TokenAuthentication])
@@ -51,14 +52,14 @@ class IdeaLikeView(APIView):
         )
     )
     def post(self, request):
-        user = request.user
-        idea = Idea.objects.get(pk=request.data["idea_id"])
-        data = {"user": user.id, "idea": idea.id}
-        serializer = IdeaLikeSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        idea_id = request.data.get("idea_id")
+        idea = get_idea_by_parameter("id", idea_id)
+        if idea is None:
+            return Response({"detail": "Идея не найдена."}, status=status.HTTP_404_NOT_FOUND)
+
+        add_or_remove_like(idea, request.user)
+
+        return Response({"status": "Лайк обновлён."}, status=status.HTTP_201_CREATED)
 
 
 class TagViewSet(generics.ListAPIView):

@@ -1,8 +1,14 @@
+from typing import Any
+
+from app.internal.models.admin_user import AdminUser
 from app.internal.models.idea import Idea
 
 
-def add_or_remove_like(idea_id: int, user):
-    idea = Idea.objects.get(id=idea_id)
+def get_idea_by_parameter(parameter: str, value: Any) -> AdminUser | None:
+    return Idea.objects.filter(**{parameter: value}).first()
+
+
+def add_or_remove_like(idea: Idea, user: AdminUser):
     if user in idea.likes.all():
         idea.likes.remove(user)
     else:
