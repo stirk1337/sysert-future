@@ -12,6 +12,7 @@ from app.internal.transport.idea.handlers import (
 )
 from django.urls import path
 
+from app.internal.transport.site_configuration.handlers import SiteConfViewSet
 from app.internal.transport.success_detector.handlers import SuccessDetectorViewSet
 
 from rest_framework.authtoken import views
@@ -29,12 +30,17 @@ urlpatterns = [
     ),
     path("api-token-auth/obtain_auth_token/", views.obtain_auth_token),
     path("api-token-auth/save_cookie/", SaveCookieView.as_view(), name="save_cookie"),
+
     path("tag/", TagViewSet.as_view(), name="tag"),
     path("idea/", IdeaViewSet.as_view(), name="idea"),
     path("idea/like/", IdeaLikeView.as_view(), name="idea_like"),
+
     path(
         "success_detector/", SuccessDetectorViewSet.as_view(), name="success_detector"
     ),
+
     path("generate/idea/", IdeaGenerationView.as_view(), name="generate_idea"),
     path("generate/picture/", PictureGenerationView.as_view(), name="generate_picture"),
+
+    path("get_site_conf/", SiteConfViewSet.as_view(), name="site_configuration")
 ]
