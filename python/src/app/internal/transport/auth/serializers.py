@@ -6,7 +6,7 @@ from app.internal.models.admin_user import AdminUser
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = AdminUser
-        fields = ["id", "username", "first_name", "last_name", "photo_url"]
+        fields = ["id", "username", "first_name", "last_name", "photo_url", "cookie"]
 
 
 class CookieSerializer(serializers.Serializer):
