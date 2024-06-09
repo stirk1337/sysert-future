@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeTagStatus, clearIdeaData, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setIdeas, setImageLoad, setTags } from './action';
+import { changeTagStatus, clearIdeaData, setAccessData, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setIdeas, setImageLoad, setTags } from './action';
 
 type InitialState = {
     ideaIsLoading: boolean
@@ -7,6 +7,7 @@ type InitialState = {
     idea: Idea;
     tags: Tags[]
     ideas: IdeaExchange[]
+    successData: SuccessDetector[]
 }
 
 const initialState: InitialState = {
@@ -18,7 +19,8 @@ const initialState: InitialState = {
         image: ''
     },
     tags: [],
-    ideas: []
+    ideas: [],
+    successData: [],
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -60,5 +62,8 @@ export const reducer = createReducer(initialState, (builder) => {
         })
         .addCase(setIdeas, (state, action) => {
             state.ideas = action.payload;
+        })
+        .addCase(setAccessData, (state, action) => {
+            state.successData = action.payload;
         })
 });

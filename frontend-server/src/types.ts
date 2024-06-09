@@ -33,3 +33,22 @@ type IdeaExchange = Idea & {
     id: string;
     active_tags: number[];
 }
+
+type SuccessDetector = {
+    id: string;
+    title: string;
+    description: string;
+    progress: number;
+    items: SuccessDetectorBlock[];
+}
+
+type SuccessDetectorBlock = {
+    id: string;
+    title: string;
+    description: string;
+    is_test: boolean;
+    answer1: string | null;
+    answer2: string | null;
+    answer3: string | null;
+    alter_test: string | null;
+}

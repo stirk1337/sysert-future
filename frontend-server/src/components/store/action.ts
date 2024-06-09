@@ -17,3 +17,5 @@ export const setIdea = createAction<Idea>('idea/setIdea');
 export const clearIdeaData = createAction('idea/clearIdeaData')
 
 export const setIdeas = createAction<IdeaExchange[]>('idea/setIdeas')
+
+export const setAccessData = createAction<SuccessDetector[]>('idea/setAccessData')

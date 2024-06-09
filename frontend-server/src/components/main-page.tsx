@@ -4,6 +4,7 @@ import Header from "./header"
 import HistoryBlock from "./history-block"
 import IdeasBlock from "./ideas-block"
 import MainBlock from "./main-block"
+import SuccessDetector from "./success-detector"
 
 function MainPage() {
     return (
@@ -12,6 +13,7 @@ function MainPage() {
             <main>
                 <MainBlock />
                 <HistoryBlock />
+                <SuccessDetector />
                 <IdeasBlock />
                 <GenerateIdeaBlock />
                 <Footer />
