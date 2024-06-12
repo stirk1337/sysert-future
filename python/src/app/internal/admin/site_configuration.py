@@ -6,7 +6,7 @@ from ..models.site_configuration import SiteConfiguration
 
 @admin.register(SiteConfiguration)
 class SiteConfigurationAdmin(ModelAdmin):
-    list_display = ["gigachat_prompt"]
+    list_display = ["gigachat_prompt", "history", "success_detector", "idea_view", "idea_generate"]
 
 
 try:

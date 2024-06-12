@@ -3,6 +3,7 @@ from app.internal.admin.idea import IdeaAdmin, TagAdmin  # noqa
 from app.internal.admin.site_configuration import SiteConfiguration  # noqa
 from app.internal.admin.slang import SlangAdmin  # noqa
 from app.internal.admin.success_detector import SuccessDetectorAdmin, TestItemAdmin  # noqa
+from app.internal.admin.history import HistoryAdmin  # noqa
 from django.contrib import admin
 
 admin.site.site_title = "Sysert-future"

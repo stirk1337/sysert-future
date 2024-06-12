@@ -3,6 +3,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 from app.gchat import generate_idea
+from app.imgbb import upload_image
 from app.internal.models.idea import Idea, Tag
 from app.kandinsky import api
 from app.slang_filter import PymorphyProc
@@ -16,7 +17,6 @@ from .serializers import (
     IdeaGenerationSerializer,
     IdeaSerializer,
     TagSerializer,
-    IdeaLikeSerializer,
 )
 from ...services.idea_service import add_or_remove_like, get_idea_by_parameter
 
@@ -33,7 +33,7 @@ class IdeaViewSet(generics.ListCreateAPIView):
                 or PymorphyProc.test(request.data["description"]) > 0
             ):
                 raise RuntimeError("Slang detected")
-            # request.data["image"] = upload_image(request.data["image"])
+            request.data["image"] = upload_image(request.data["image"])
             request.data["created_by"] = request.user.pk
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
