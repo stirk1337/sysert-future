@@ -1,8 +1,85 @@
 {
-  "hash": "dc8c9d64",
+  "hash": "95f63015",
   "configHash": "4fc43c59",
-  "lockfileHash": "2106db1e",
-  "browserHash": "efce3444",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "ee9c4b34",
+  "browserHash": "d4ec37cc",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "5a95464b",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "96639596",
+      "needsInterop": true
+    },
+    "react-redux": {
+      "src": "../../node_modules/react-redux/dist/react-redux.mjs",
+      "file": "react-redux.js",
+      "fileHash": "cea4802d",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "bc1e27b4",
+      "needsInterop": false
+    },
+    "@reduxjs/toolkit": {
+      "src": "../../node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs",
+      "file": "@reduxjs_toolkit.js",
+      "fileHash": "5d2ab0ee",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "a45915a8",
+      "needsInterop": false
+    },
+    "react-scroll": {
+      "src": "../../node_modules/react-scroll/modules/index.js",
+      "file": "react-scroll.js",
+      "fileHash": "a04a0dd6",
+      "needsInterop": true
+    },
+    "react-beautiful-dnd": {
+      "src": "../../node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js",
+      "file": "react-beautiful-dnd.js",
+      "fileHash": "45cfb4bd",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "ed412985",
+      "needsInterop": true
+    },
+    "@mui/material": {
+      "src": "../../node_modules/@mui/material/index.js",
+      "file": "@mui_material.js",
+      "fileHash": "3e7eba10",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-S4FUA5WJ": {
+      "file": "chunk-S4FUA5WJ.js"
+    },
+    "chunk-NV2AUDXZ": {
+      "file": "chunk-NV2AUDXZ.js"
+    },
+    "chunk-4ZSTBHIF": {
+      "file": "chunk-4ZSTBHIF.js"
+    },
+    "chunk-HAZNF34R": {
+      "file": "chunk-HAZNF34R.js"
+    },
+    "chunk-WXXH56N5": {
+      "file": "chunk-WXXH56N5.js"
+    }
+  }
 }

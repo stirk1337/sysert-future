@@ -1,12 +1,15 @@
 import { RefObject, useEffect, useRef, useState } from "react"
 import GenerateForm from "./generate-form"
 import EditForm from "./edit-form"
-import { useAppDispatch } from "./hooks"
+import { useAppDispatch, useAppSelector } from "./hooks"
 import { getTags } from "./store/api-actions/get-actions"
 import { LoadingStatuses } from "../enums"
+import { setModal } from "./store/action"
 
 function GenerateIdeaBlock() {
     const dispatch = useAppDispatch()
+
+    const userData = useAppSelector((store) => store.userData)
 
     const [isEdit, setIsEdit] = useState(false)
     const [formLabel, setFormLabel] = useState('тебе нравится')
@@ -46,6 +49,14 @@ function GenerateIdeaBlock() {
             resizeObserver.disconnect();
         };
     }, [])
+
+    useEffect(() => {
+        if (isEdit && userData.id === 0) {
+            dispatch(setModal(true))
+            document.getElementsByTagName("body")[0].style.overflow = 'hidden';
+            document.getElementsByTagName("html")[0].style.overflow = 'hidden';
+        }
+    }, [isEdit])
 
     function handleLabel(label: string) {
         setFormLabel(label)

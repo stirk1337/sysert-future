@@ -32,6 +32,8 @@ type Tags = {
 type IdeaExchange = Idea & {
     id: string;
     active_tags: number[];
+    likes: shortUserData[];
+    created_by: number;
 }
 
 type SuccessDetector = {
@@ -51,4 +53,19 @@ type SuccessDetectorBlock = {
     answer2: string | null;
     answer3: string | null;
     alter_test: string | null;
+}
+
+type shortUserData = {
+    id: string;
+    username: string;
+}
+
+type UserData = {
+    id: number;
+    first_name: string;
+    last_name: string;
+    username: string;
+    photo_url: string;
+    auth_date: number;
+    hash: string;
 }

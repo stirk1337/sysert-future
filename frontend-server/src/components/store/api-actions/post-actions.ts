@@ -2,6 +2,7 @@ import { AxiosInstance } from "axios";
 import { AppDispatch, State } from "..";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setImageLoad } from "../action";
+import { getIdeas } from "./get-actions";
 
 export const generateIdea = createAsyncThunk<void, { like: string, want: string, can: string }, {
     dispatch: AppDispatch;
@@ -58,8 +59,24 @@ export const saveIdea = createAsyncThunk<void, { tags: string[], title: string, 
                 description: data.description,
                 image: `data:image/png;base64,${data.image}`
             }
-            console.log(data.image)
             dispatch(setIdea(idea))
+            dispatch(getIdeas())
+        } catch (error) {
+            console.log(error);
+        }
+    },
+);
+
+export const likeIdea = createAsyncThunk<void, { id: number }, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'idea/generateImage',
+    async (data, { dispatch, extra: api }) => {
+        try {
+            await api.post('/idea/like/', { idea_id: data.id });
+            dispatch(getIdeas())
         } catch (error) {
             console.log(error);
         }

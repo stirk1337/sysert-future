@@ -40,6 +40,7 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
             changeProgress(questionIndex)
             onFinish(currentBlockProgress.filter(question => question).length)
         }
+        setIsAnswerClicked(false)
     }
 
     function changeProgress(questionIndex: number) {

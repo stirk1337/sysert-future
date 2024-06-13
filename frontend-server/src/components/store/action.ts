@@ -19,3 +19,7 @@ export const clearIdeaData = createAction('idea/clearIdeaData')
 export const setIdeas = createAction<IdeaExchange[]>('idea/setIdeas')
 
 export const setAccessData = createAction<SuccessDetector[]>('idea/setAccessData')
+
+export const setModal = createAction<boolean>('telegram/setModal')
+
+export const setUser = createAction<UserData>('telegram/setUser')

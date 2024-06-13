@@ -89,8 +89,8 @@ function SuccessDetector() {
 
     function finishBlock(progress: number) {
         const numberQuestions = currentQuestionsBlock?.items ? currentQuestionsBlock.items.length : 0
-        const currentPercentage = localStorage.getItem(currentQuestionsBlock?.id || '0')
-        if (currentPercentage && numberQuestions !== 0 && currentQuestionsBlock) {
+        const currentPercentage = localStorage.getItem(currentQuestionsBlock?.id || '0') || 0
+        if (currentPercentage !== null && numberQuestions !== 0 && currentQuestionsBlock) {
             const percentage = Math.floor(progress / numberQuestions * 100)
             setPercentProgress(percentage)
             if (Number(currentPercentage) < percentage)
