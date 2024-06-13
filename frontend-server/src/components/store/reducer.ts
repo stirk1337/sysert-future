@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeTagStatus, clearIdeaData, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setIdeas, setImageLoad, setTags } from './action';
+import { changeTagStatus, clearIdeaData, setAccessData, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setIdeas, setImageLoad, setModal, setTags, setUser } from './action';
 
 type InitialState = {
     ideaIsLoading: boolean
@@ -7,6 +7,9 @@ type InitialState = {
     idea: Idea;
     tags: Tags[]
     ideas: IdeaExchange[]
+    successData: SuccessDetector[]
+    isTelegramModalOpen: boolean
+    userData: UserData;
 }
 
 const initialState: InitialState = {
@@ -18,7 +21,18 @@ const initialState: InitialState = {
         image: ''
     },
     tags: [],
-    ideas: []
+    ideas: [],
+    successData: [],
+    isTelegramModalOpen: false,
+    userData: {
+        id: 0,
+        first_name: '',
+        last_name: '',
+        username: '',
+        photo_url: '',
+        auth_date: 0,
+        hash: ''
+    }
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -60,5 +74,14 @@ export const reducer = createReducer(initialState, (builder) => {
         })
         .addCase(setIdeas, (state, action) => {
             state.ideas = action.payload;
+        })
+        .addCase(setAccessData, (state, action) => {
+            state.successData = action.payload;
+        })
+        .addCase(setModal, (state, action) => {
+            state.isTelegramModalOpen = action.payload;
+        })
+        .addCase(setUser, (state, action) => {
+            state.userData = action.payload
         })
 });

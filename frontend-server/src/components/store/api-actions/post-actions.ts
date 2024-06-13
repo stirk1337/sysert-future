@@ -2,6 +2,7 @@ import { AxiosInstance } from "axios";
 import { AppDispatch, State } from "..";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setImageLoad } from "../action";
+import { getIdeas } from "./get-actions";
 
 export const generateIdea = createAsyncThunk<void, { like: string, want: string, can: string }, {
     dispatch: AppDispatch;
@@ -12,7 +13,7 @@ export const generateIdea = createAsyncThunk<void, { like: string, want: string,
     async (data, { dispatch, extra: api }) => {
         try {
             dispatch(setIdeaLoad(true))
-            const { data: idea } = await api.post('/generate_idea/', { like: data.like, want: data.want, can: data.can });
+            const { data: idea } = await api.post('/generate/idea/', { like: data.like, want: data.want, can: data.can });
             dispatch(setIdeaLoad(false))
             const ideaData: IdeaData = {
                 title: idea.idea.title,
@@ -35,7 +36,7 @@ export const generateImage = createAsyncThunk<void, { ideaName: string }, {
     async (data, { dispatch, extra: api }) => {
         try {
             dispatch(setImageLoad(true))
-            const { data: image } = await api.post('/generate_picture/', { prompt: data.ideaName });
+            const { data: image } = await api.post('/generate/picture/', { prompt: data.ideaName });
             dispatch(setImageLoad(false))
             dispatch(setIdeaImage(`data:image/png;base64,${image.image}`));
         } catch (error) {
@@ -58,8 +59,24 @@ export const saveIdea = createAsyncThunk<void, { tags: string[], title: string, 
                 description: data.description,
                 image: `data:image/png;base64,${data.image}`
             }
-            console.log(data.image)
             dispatch(setIdea(idea))
+            dispatch(getIdeas())
+        } catch (error) {
+            console.log(error);
+        }
+    },
+);
+
+export const likeIdea = createAsyncThunk<void, { id: number }, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'idea/generateImage',
+    async (data, { dispatch, extra: api }) => {
+        try {
+            await api.post('/idea/like/', { idea_id: data.id });
+            dispatch(getIdeas())
         } catch (error) {
             console.log(error);
         }
