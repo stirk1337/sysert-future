@@ -40,22 +40,6 @@
             background-repeat: no-repeat;
             z-index: -2;
         }
-
-        &::before {
-            position: absolute;
-            top: -10px;
-            left: 38%;
-            content: "✓";
-            padding-top: 5px;
-            box-sizing: border-box;
-            text-align: center;
-            color: #FFCC19;
-            border-radius: 50%;
-            box-shadow: 0px 0px 8px #FFCC19;
-            background-color: white;
-            width: 70px;
-            height: 67px;
-        }
     }
 
     .form-toggle {
@@ -228,6 +212,26 @@
                     background-color: rgba(0, 0, 0, 0.20);
                 }
             }
+        }
+    }
+}
+
+#ideas.completed {
+    h2 {
+        &::before {
+            position: absolute;
+            top: -10px;
+            left: 38%;
+            content: "✓";
+            padding-top: 5px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #FFCC19;
+            border-radius: 50%;
+            box-shadow: 0px 0px 8px #FFCC19;
+            background-color: white;
+            width: 70px;
+            height: 67px;
         }
     }
 }

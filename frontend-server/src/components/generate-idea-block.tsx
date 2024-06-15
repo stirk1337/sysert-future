@@ -15,6 +15,11 @@ function GenerateIdeaBlock() {
     const [formLabel, setFormLabel] = useState('тебе нравится')
     const [formHeight, setFormHeight] = useState(70)
     const [loadingStatus, setLoadingStatus] = useState<LoadingStatuses>(LoadingStatuses.default)
+    const [isCompleted, setIsCompleted] = useState<string | null>(null)
+
+    useEffect(() => {
+        setIsCompleted(localStorage.getItem('generate'))
+    }, [])
 
     const elementRef: RefObject<HTMLDivElement> = useRef(null);
     const scrollToRef: RefObject<HTMLDivElement> = useRef(null);
@@ -74,11 +79,16 @@ function GenerateIdeaBlock() {
         setLoadingStatus(status)
     }
 
+    function handleComplete() {
+        localStorage.setItem('generate', 'completed')
+        setIsCompleted('completed')
+    }
+
     return (
-        <section ref={elementRef} id="generate-idea">
+        <section ref={elementRef} id="generate-idea" className={isCompleted ? 'completed' : ''}>
             <h2>Генератор идей</h2>
             <p>Здесь ты можешь создать идею, которая может найти своё будущие в твоих или других руках! Напиши её сам или при помощи нейросетей</p>
-            <div className={isEdit ? 'generate-form edit' : 'generate-form'} style={{ "--max-height": `${isEdit ? '990' : formHeight + 200}px` } as React.CSSProperties}>
+            <div className={isEdit ? 'generate-form edit' : 'generate-form'} style={{ "--max-height": `${isEdit ? '1000' : formHeight + 200}px` } as React.CSSProperties}>
                 <div className="form-header">
                     {!isEdit ? <h3>Напиши о том, что {formLabel}</h3> : <h3>Отредактируй или опиши свою идею</h3>}
                     <div className="form-toggle-block">
@@ -89,7 +99,7 @@ function GenerateIdeaBlock() {
                         <p>ИИ</p>
                     </div>
                 </div>
-                {isEdit ? <EditForm loadingStatus={loadingStatus} changeLoadStatus={changeLoadStatus} /> : <GenerateForm setLabel={handleLabel} setHeight={changeFormHeight} setEdit={changeToggle} height={formHeight} />}
+                {isEdit ? <EditForm handleComplete={handleComplete} loadingStatus={loadingStatus} changeLoadStatus={changeLoadStatus} /> : <GenerateForm setLabel={handleLabel} setHeight={changeFormHeight} setEdit={changeToggle} height={formHeight} />}
             </div>
             <div ref={scrollToRef}></div>
         </section>

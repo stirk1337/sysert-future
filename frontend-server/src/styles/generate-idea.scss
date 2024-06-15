@@ -39,22 +39,6 @@
             background-repeat: no-repeat;
             z-index: -2;
         }
-
-        &::before {
-            position: absolute;
-            top: -10px;
-            left: 25%;
-            content: "✓";
-            padding-top: 5px;
-            box-sizing: border-box;
-            text-align: center;
-            color: #FD9251;
-            border-radius: 50%;
-            box-shadow: 0px 0px 8px #FD9251;
-            background-color: white;
-            width: 70px;
-            height: 67px;
-        }
     }
 
     .generate-form.edit {
@@ -184,13 +168,14 @@
                 font-size: 2.25rem;
                 margin: 0 auto;
                 text-align: center;
-                padding: 7px 28px;
+                padding: 9px 28px;
                 height: 57px;
                 margin-top: 50px;
 
                 &.loaded {
                     cursor: default;
                     width: 10%;
+                    padding: 5px 28px;
                 }
             }
 
@@ -300,6 +285,26 @@
                     }
                 }
             }
+        }
+    }
+}
+
+#generate-idea.completed {
+    h2 {
+        &::before {
+            position: absolute;
+            top: -10px;
+            left: 25%;
+            content: "✓";
+            padding-top: 5px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #FD9251;
+            border-radius: 50%;
+            box-shadow: 0px 0px 8px #FD9251;
+            background-color: white;
+            width: 70px;
+            height: 67px;
         }
     }
 }
