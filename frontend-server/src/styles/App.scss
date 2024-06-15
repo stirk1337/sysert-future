@@ -5,6 +5,8 @@
 @import "./idea-block.scss";
 @import "./generate-idea.scss";
 @import "./footer.scss";
+@import "./success-card.scss";
+@import "./telegram-modal.scss";
 
 * {
     box-sizing: border-box;
@@ -33,7 +35,8 @@ section {
 }
 
 html,
-body {
+body,
+#root {
     overflow-x: hidden;
 }
 
@@ -80,4 +83,15 @@ html::-webkit-scrollbar {
     color: red;
     font-size: 1.25rem;
     margin-bottom: 10px;
+}
+
+.pop-up-background {
+    z-index: 3;
+    position: fixed !important;
+    opacity: 0.5;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: black;
 }

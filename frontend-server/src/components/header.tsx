@@ -1,4 +1,4 @@
-import { Link, Element, animateScroll as scroll } from 'react-scroll';
+import { Link } from 'react-scroll';
 
 function Header() {
     return (

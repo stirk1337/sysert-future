@@ -95,8 +95,8 @@ function EditForm({ loadingStatus, changeLoadStatus }: EditFormProps) {
                     <div className="image-block">
                         {(!isDataLoading && !isImageLoading) ?
                             <>
-                                <div className="hover-block" onClick={handleGenerateImage}>Сгенерировать</div>
-                                <img src={ideaData.image ? ideaData.image : '/bridge.png'} width={391} height={223}></img>
+                                <div className={ideaData.image ? 'hover-block' : 'no-image'} onClick={handleGenerateImage}>Сгенерировать</div>
+                                {ideaData.image && <img src={ideaData.image} width={391} height={223}></img>}
                             </>
                             :
                             <div className="loading">
