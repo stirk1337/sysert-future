@@ -1,4 +1,62 @@
 #ideas {
+    position: relative;
+    min-height: 969px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 40%;
+        left: 10%;
+        width: 374px;
+        height: 364px;
+        background-image: url('/background-ideas/background-1.jpg');
+        background-repeat: no-repeat;
+        z-index: -2;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 40%;
+        left: 76%;
+        width: 731px;
+        height: 705px;
+        background-image: url('/background-ideas/background-2.jpg');
+        background-repeat: no-repeat;
+        z-index: -2;
+    }
+
+    h2 {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -2%;
+            width: 792px;
+            height: 121px;
+            background-image: url('/background-ideas/background-text.jpg');
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        &::before {
+            position: absolute;
+            top: -10px;
+            left: 38%;
+            content: "✓";
+            padding-top: 5px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #FFCC19;
+            border-radius: 50%;
+            box-shadow: 0px 0px 8px #FFCC19;
+            background-color: white;
+            width: 70px;
+            height: 67px;
+        }
+    }
 
     .form-toggle {
         position: relative;
@@ -68,7 +126,7 @@
         left: 10%;
         display: flex;
         gap: 1%;
-        margin-top: 16px;
+        margin-top: 70px;
 
         >li {
             transition: background 0.5s;

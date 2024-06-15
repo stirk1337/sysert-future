@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "./hooks";
+import { setModal } from "./store/action";
 import { likeIdea } from "./store/api-actions/post-actions";
 
 type IdeaCardProps = {
@@ -10,9 +11,17 @@ function IdeaCard({ card, currentCard }: IdeaCardProps) {
     const dispatch = useAppDispatch()
 
     const tags = useAppSelector((store) => store.tags)
+    const userData = useAppSelector((store) => store.userData)
 
     function handleLikeClick() {
-        dispatch(likeIdea({ id: Number(card.id) }))
+        if (userData.id === 0) {
+            dispatch(setModal(true))
+            document.getElementsByTagName("body")[0].style.overflow = 'hidden';
+            document.getElementsByTagName("html")[0].style.overflow = 'hidden';
+        }
+        else {
+            dispatch(likeIdea({ id: Number(card.id) }))
+        }
     }
 
     return (
