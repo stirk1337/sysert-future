@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-export const BACKEND_URL = `http://localhost:81/api`;
+export const BACKEND_URL = `http://localhost:8000/api`;
 export const REQUEST_TIMEOUT = 5000000;
 
 export const createAPI = (): AxiosInstance => {
