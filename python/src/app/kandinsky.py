@@ -61,7 +61,7 @@ class Text2ImageAPI:
                 watermark.thumbnail((500, 100))
 
                 copied_image = image.copy()
-                copied_image.paste(watermark, (15, 15), watermark.convert("RGBA"))
+                copied_image.paste(watermark, (520, 15), watermark.convert("RGBA"))
 
                 buffered = io.BytesIO()
                 copied_image.save(buffered, format="PNG")

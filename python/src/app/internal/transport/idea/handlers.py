@@ -32,7 +32,7 @@ class IdeaViewSet(generics.ListCreateAPIView):
                 PymorphyProc.test(request.data["title"]) > 0
                 or PymorphyProc.test(request.data["description"]) > 0
             ):
-                raise RuntimeError("Slang detected")
+                raise RuntimeError("Обнаружены недопустимые слова. Отредактируйте свой текст")
             request.data["image"] = upload_image(request.data["image"])
             request.data["created_by"] = request.user.pk
         except Exception as e:

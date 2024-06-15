@@ -5,8 +5,8 @@ from django.db import models
 
 class Idea(models.Model):
     title = models.CharField(max_length=500, verbose_name="Заголовок")
-    description = models.CharField(max_length=500, verbose_name="Описание")
-    image = models.CharField(max_length=1000, verbose_name="Картинка", default="")
+    description = models.CharField(max_length=500, verbose_name="Описание", blank=True, default=None, null=True)
+    image = models.CharField(max_length=1000, verbose_name="Картинка", default="", blank=True, null=True)
     tags = models.ManyToManyField("Tag", through="IdeaTag", verbose_name="Теги")
     created_by = models.ForeignKey(
         "AdminUser",
@@ -61,16 +61,22 @@ class IdeaTag(models.Model):
     class Meta:
         verbose_name = "Тег идее"
         verbose_name_plural = "Теги идей"
+        constraints = [
+            models.UniqueConstraint(fields=['idea', 'tag'], name='unique_idea_tag')
+        ]
 
 
 class IdeaLike(models.Model):
     idea = models.ForeignKey(
-        Idea, on_delete=models.CASCADE, verbose_name="Идея", unique=True
+        Idea, on_delete=models.CASCADE, verbose_name="Идея"
     )
     user = models.ForeignKey(
-        "AdminUser", on_delete=models.CASCADE, verbose_name="Лайк", unique=True
+        "AdminUser", on_delete=models.CASCADE, verbose_name="Лайк"
     )
 
     class Meta:
         verbose_name = "Лайк идее"
         verbose_name_plural = "Лайки идей"
+        constraints = [
+            models.UniqueConstraint(fields=['idea', 'user'], name='unique_idea_user')
+        ]

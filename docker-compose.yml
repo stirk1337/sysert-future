@@ -31,6 +31,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfiles/Dockerfile_React
+    ports:
+      - "5173:5173"
     restart: "always"
 
   nginx:
