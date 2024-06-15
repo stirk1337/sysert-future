@@ -4,7 +4,6 @@ function MainBlock() {
             <div className="background">
                 <img src="/main-lines.svg"></img>
                 <img src="/main-line-top.svg"></img>
-                <img src="/main-line-bottom.svg"></img>
             </div>
             <section id="main">
                 <div className="flex">

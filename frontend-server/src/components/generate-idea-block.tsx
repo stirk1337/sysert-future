@@ -78,9 +78,9 @@ function GenerateIdeaBlock() {
         <section ref={elementRef} id="generate-idea">
             <h2>Генератор идей</h2>
             <p>Здесь ты можешь создать идею, которая может найти своё будущие в твоих или других руках! Напиши её сам или при помощи нейросетей</p>
-            <div className="generate-form" style={{ "--max-height": `${isEdit ? '960' : formHeight + 200}px` } as React.CSSProperties}>
+            <div className={isEdit ? 'generate-form edit' : 'generate-form'} style={{ "--max-height": `${isEdit ? '990' : formHeight + 200}px` } as React.CSSProperties}>
                 <div className="form-header">
-                    {!isEdit && <h3>Напиши о том, что {formLabel}</h3>}
+                    {!isEdit ? <h3>Напиши о том, что {formLabel}</h3> : <h3>Отредактируй или опиши свою идею</h3>}
                     <div className="form-toggle-block">
                         <img width={35} height={35} src="/generate-edit-icon.svg"></img>
                         <button onClick={changeToggle} className="form-toggle">

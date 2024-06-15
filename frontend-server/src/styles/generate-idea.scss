@@ -1,5 +1,78 @@
 #generate-idea {
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 102%;
+        left: -10%;
+        width: 619px;
+        height: 149px;
+        background-image: url('/background-generate/background-4.jpg');
+        background-repeat: no-repeat;
+        z-index: -2;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 20%;
+        left: 70%;
+        width: 674px;
+        height: 628px;
+        background-image: url('/background-generate/background-3.jpg');
+        background-repeat: no-repeat;
+        z-index: -2;
+    }
+
+    h2 {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: -115%;
+            left: -3%;
+            width: 705px;
+            height: 862px;
+            background-image: url('/background-generate/background-text.jpg');
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        &::before {
+            position: absolute;
+            top: -10px;
+            left: 25%;
+            content: "✓";
+            padding-top: 5px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #FD9251;
+            border-radius: 50%;
+            box-shadow: 0px 0px 8px #FD9251;
+            background-color: white;
+            width: 70px;
+            height: 67px;
+        }
+    }
+
+    .generate-form.edit {
+        &::after {
+            content: "";
+            position: absolute;
+            top: 4%;
+            left: 0%;
+            width: 1258px;
+            height: 100%;
+            background-image: url('/background-generate/background-2.jpg');
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+    }
+
     .generate-form {
+        position: relative;
         transition: 0.5s;
         height: var(--max-height);
         margin: 0 auto;
@@ -9,6 +82,18 @@
         width: 80%;
         padding: 32px;
         overflow: hidden;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0%;
+            left: -3%;
+            width: 1258px;
+            height: 616px;
+            background-image: url('/background-generate/background-1.jpg');
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
 
         .form-header {
             display: flex;
@@ -101,6 +186,7 @@
                 text-align: center;
                 padding: 7px 28px;
                 height: 57px;
+                margin-top: 50px;
 
                 &.loaded {
                     cursor: default;
@@ -153,6 +239,17 @@
                     &:hover .hover-block {
                         z-index: 2;
                         opacity: 1;
+                    }
+
+                    .no-image {
+                        display: flex;
+                        width: 391px;
+                        height: 223px;
+                        justify-content: center;
+                        align-items: center;
+                        background: linear-gradient(277deg, #FFBD27 0%, #FD647F 100%);
+                        border-radius: 20px;
+                        cursor: pointer;
                     }
 
                     .loading {
