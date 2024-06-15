@@ -12,9 +12,11 @@ function IdeasBlock() {
     const [blockPositions, setBlockPositions] = useState(-10)
     const [isUserCards, setUserCards] = useState(false)
     const [ideasList, setIdeasList] = useState<IdeaExchange[]>(ideasListData)
+    const [isCompleted, setIsCompleted] = useState<string | null>(null)
 
     useEffect(() => {
         dispatch(getIdeas())
+        setIsCompleted(localStorage.getItem('ideas'))
     }, [])
 
     useEffect(() => {
@@ -40,8 +42,13 @@ function IdeasBlock() {
         setUserCards(!isUserCards)
     }
 
+    function handleComplete() {
+        localStorage.setItem('ideas', 'completed')
+        setIsCompleted('completed')
+    }
+
     return (
-        <section id="ideas">
+        <section id="ideas" className={isCompleted ? 'completed' : ''}>
             <h2>Меняющие культуру идеи</h2>
             <p>Добро пожаловать на биржу идей! Здесь любой человек может опубликовать собственную идею, а также посмотреть на идеи других людей и оценить их</p>
             <div className="card-block-with-controls">
@@ -58,7 +65,7 @@ function IdeasBlock() {
                     </div>
                 }
                 <ul className="ideas-list" style={{ left: blockPositions + '%' }}>
-                    {ideasList.map(idea => <IdeaCard key={idea.id} card={idea} currentCard={currentCard} />)}
+                    {ideasList.map(idea => <IdeaCard key={idea.id} handleComplete={handleComplete} card={idea} currentCard={currentCard} />)}
                 </ul>
             </div>
         </section>

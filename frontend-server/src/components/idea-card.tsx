@@ -5,9 +5,10 @@ import { likeIdea } from "./store/api-actions/post-actions";
 type IdeaCardProps = {
     card: IdeaExchange;
     currentCard: number;
+    handleComplete: () => void;
 }
 
-function IdeaCard({ card, currentCard }: IdeaCardProps) {
+function IdeaCard({ card, currentCard, handleComplete }: IdeaCardProps) {
     const dispatch = useAppDispatch()
 
     const tags = useAppSelector((store) => store.tags)
@@ -21,6 +22,7 @@ function IdeaCard({ card, currentCard }: IdeaCardProps) {
         }
         else {
             dispatch(likeIdea({ id: Number(card.id) }))
+            handleComplete()
         }
     }
 

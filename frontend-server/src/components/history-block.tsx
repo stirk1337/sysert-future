@@ -1,10 +1,15 @@
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
 import { historyList } from '../const-data'
 import HistoryCard from './history-cards'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function HistoryBlock() {
     const [historyCards, setHistoryCards] = useState(historyList)
+    const [isCompleted, setIsCompleted] = useState<string | null>(null)
+
+    useEffect(() => {
+        setIsCompleted(localStorage.getItem('history'))
+    }, [])
 
 
     function onDragEnd(result: DropResult) {
@@ -16,11 +21,24 @@ function HistoryBlock() {
         array.splice(source.index, 1)
         array.splice(destination.index, 0, element)
         setHistoryCards([...array])
+        if (isSortedAscending(array)) {
+            localStorage.setItem('history', 'completed')
+            setIsCompleted('completed')
+        }
+    }
+
+    function isSortedAscending(lst: historyListType[]): boolean {
+        for (let i = 0; i < lst.length - 1; i++) {
+            if (Number(lst[i].id) > Number(lst[i + 1].id)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     return (
         <div className="history-block">
-            <section id="history">
+            <section id="history" className={isCompleted ? 'completed' : ''}>
                 <h2>Как это было?</h2>
                 <p>Собери реку в правильном порядке и узнай больше о городе</p>
 

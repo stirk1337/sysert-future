@@ -8,9 +8,10 @@ import { LoadingStatuses, LoadingStatusesContent } from "../enums"
 type EditFormProps = {
     loadingStatus: LoadingStatuses
     changeLoadStatus: (status: LoadingStatuses) => void
+    handleComplete: () => void;
 }
 
-function EditForm({ loadingStatus, changeLoadStatus }: EditFormProps) {
+function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormProps) {
     const dispatch = useAppDispatch()
     const isDataLoading = useAppSelector((store) => store.ideaIsLoading)
     const isImageLoading = useAppSelector((store) => store.imageIsLoading)
@@ -67,7 +68,10 @@ function EditForm({ loadingStatus, changeLoadStatus }: EditFormProps) {
                 image: ideaData.image.split(',')[1]
             }
             changeLoadStatus(LoadingStatuses.loading)
-            dispatch(saveIdea(idea)).then(() => changeLoadStatus(LoadingStatuses.loaded))
+            dispatch(saveIdea(idea)).then(() => {
+                changeLoadStatus(LoadingStatuses.loaded)
+                handleComplete()
+            })
         }
         else if (!ideaName) {
             setError('Поле заголовка не должно быть пустым')

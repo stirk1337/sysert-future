@@ -17,6 +17,11 @@ function SuccessDetector() {
     const [currentQuestionsBlock, setCurrentQuestionsBlock] = useState<SuccessDetector | null>(null)
     const [isResultBlock, setIsResultBlock] = useState<boolean>(false)
     const [percentProgress, setPercentProgress] = useState(0)
+    const [isCompleted, setIsCompleted] = useState<string | null>(null)
+
+    useEffect(() => {
+        setIsCompleted(localStorage.getItem('success'))
+    }, [])
 
     useEffect(() => {
         setIsResultBlock(false)
@@ -101,6 +106,8 @@ function SuccessDetector() {
             localStorage.setItem(currentQuestionsBlock?.id, '100')
         }
         setIsResultBlock(true)
+        localStorage.setItem('success', 'completed')
+        setIsCompleted('completed')
     }
 
     function onClose() {
@@ -111,7 +118,7 @@ function SuccessDetector() {
 
     return (
         <>
-            <section id="success-block">
+            <section id="success-block" className={isCompleted ? 'completed' : ''}>
                 <h2>Детектор успеха</h2>
                 <p>Выбери историю успеха и узнай, смог бы ты добится успеха!</p>
                 <div className="success-items-block">
