@@ -23,3 +23,7 @@ export const setAccessData = createAction<SuccessDetector[]>('idea/setAccessData
 export const setModal = createAction<boolean>('telegram/setModal')
 
 export const setUser = createAction<UserData>('telegram/setUser')
+
+export const setHistory = createAction<HistoryData[]>('idea/setHistory')
+
+export const setError = createAction<string>('idea/setError')

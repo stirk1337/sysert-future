@@ -1,15 +1,40 @@
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
-import { historyList } from '../const-data'
 import HistoryCard from './history-cards'
 import { useEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from './hooks'
+import { getHistoryData } from './store/api-actions/get-actions'
 
 function HistoryBlock() {
-    const [historyCards, setHistoryCards] = useState(historyList)
+    const dispatch = useAppDispatch()
+
+    const [historyCards, setHistoryCards] = useState<HistoryData[]>([])
     const [isCompleted, setIsCompleted] = useState<string | null>(null)
 
+    const historyData = useAppSelector((store) => store.history)
+
     useEffect(() => {
+        dispatch(getHistoryData())
         setIsCompleted(localStorage.getItem('history'))
     }, [])
+
+    useEffect(() => {
+        setHistoryCards(shuffleArray(historyData))
+    }, [historyData])
+
+    useEffect(() => {
+        if (isSortedAscending(historyCards)) {
+            setHistoryCards(shuffleArray(historyData))
+        }
+    }, [historyCards])
+
+    function shuffleArray<T>(array: T[]): T[] {
+        const shuffledArray = [...array];
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
+        return shuffledArray;
+    }
 
 
     function onDragEnd(result: DropResult) {
@@ -27,7 +52,7 @@ function HistoryBlock() {
         }
     }
 
-    function isSortedAscending(lst: historyListType[]): boolean {
+    function isSortedAscending(lst: HistoryData[]): boolean {
         for (let i = 0; i < lst.length - 1; i++) {
             if (Number(lst[i].id) > Number(lst[i + 1].id)) {
                 return false;

@@ -31,7 +31,7 @@ function IdeasBlock() {
     }, [ideasListData, isUserCards])
 
     function changeCurrentCard(step: number) {
-        if (currentCard + step < 0 || currentCard + step > ideasList.length + 3) {
+        if (currentCard + step < 0) {
             return
         }
         setCurrentCard(currentCard + step)
