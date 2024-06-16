@@ -52,7 +52,7 @@ type SuccessDetectorBlock = {
     answer1: string | null;
     answer2: string | null;
     answer3: string | null;
-    alter_test: string | null;
+    after_test: string | null;
 }
 
 type shortUserData = {
@@ -68,4 +68,12 @@ type UserData = {
     photo_url: string;
     auth_date: number;
     hash: string;
+}
+
+type HistoryData = {
+    id: number;
+    title: string;
+    description: string;
+    date: string;
+    image_url: string;
 }

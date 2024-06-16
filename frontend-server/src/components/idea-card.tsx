@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { setModal } from "./store/action";
 import { likeIdea } from "./store/api-actions/post-actions";
@@ -14,6 +15,17 @@ function IdeaCard({ card, currentCard, handleComplete }: IdeaCardProps) {
     const tags = useAppSelector((store) => store.tags)
     const userData = useAppSelector((store) => store.userData)
 
+    const [isLiked, setIsLiked] = useState(false)
+
+    useEffect(() => {
+        if (card.likes.map((like) => like.id === String(userData.id)).length > 0) {
+            setIsLiked(true)
+        }
+        else {
+            setIsLiked(false)
+        }
+    }, [card])
+
     function handleLikeClick() {
         if (userData.id === 0) {
             dispatch(setModal(true))
@@ -29,7 +41,7 @@ function IdeaCard({ card, currentCard, handleComplete }: IdeaCardProps) {
     return (
         <li className={currentCard === Number(card.id) ? 'active' : ''}>
             <div className="likes-block">
-                <img onClick={handleLikeClick} src="heart.svg"></img>
+                <img onClick={handleLikeClick} src={isLiked ? "heart-liked.svg" : "heart.svg"}></img>
                 <p>{card.likes.length}</p>
             </div>
             <img className="card-image" src={card.image}></img>

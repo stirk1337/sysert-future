@@ -80,9 +80,9 @@
 
         .controls {
             position: absolute;
-            width: 130%;
-            top: 44%;
-            left: -15%;
+            min-width: 100%;
+            top: 50%;
+            left: 0;
             display: flex !important;
             justify-content: space-between;
 

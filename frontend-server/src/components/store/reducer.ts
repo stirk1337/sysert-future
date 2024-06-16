@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeTagStatus, clearIdeaData, setAccessData, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setIdeas, setImageLoad, setModal, setTags, setUser } from './action';
+import { changeTagStatus, clearIdeaData, setAccessData, setError, setHistory, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setIdeas, setImageLoad, setModal, setTags, setUser } from './action';
 
 type InitialState = {
     ideaIsLoading: boolean
@@ -10,6 +10,8 @@ type InitialState = {
     successData: SuccessDetector[]
     isTelegramModalOpen: boolean
     userData: UserData;
+    history: HistoryData[];
+    serverError: string;
 }
 
 const initialState: InitialState = {
@@ -32,7 +34,9 @@ const initialState: InitialState = {
         photo_url: '',
         auth_date: 0,
         hash: ''
-    }
+    },
+    history: [],
+    serverError: ''
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -83,5 +87,11 @@ export const reducer = createReducer(initialState, (builder) => {
         })
         .addCase(setUser, (state, action) => {
             state.userData = action.payload
+        })
+        .addCase(setHistory, (state, action) => {
+            state.history = action.payload
+        })
+        .addCase(setError, (state, action) => {
+            state.serverError = action.payload
         })
 });

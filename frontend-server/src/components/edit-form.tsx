@@ -16,6 +16,7 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
     const isDataLoading = useAppSelector((store) => store.ideaIsLoading)
     const isImageLoading = useAppSelector((store) => store.imageIsLoading)
     const tagsData = useAppSelector((store) => store.tags)
+    const errorData = useAppSelector((store) => store.serverError)
 
     const ideaData = useAppSelector(store => store.idea)
 
@@ -27,6 +28,10 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
         setIdeaName(ideaData.title)
         setIdeaDescription(ideaData.description)
     }, [ideaData])
+
+    useEffect(() => {
+        setError(errorData)
+    }, [errorData])
 
     function handleIdeaName(evt: ChangeEvent<HTMLInputElement>) {
         setIdeaName(evt.target.value)
@@ -44,6 +49,7 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
             dispatch(setIdeaData({ title: ideaName, description: description }))
             dispatch(generateImage({ ideaName: ideaName }))
             changeLoadStatus(LoadingStatuses.default)
+            setError('')
         }
         else {
             setError('Поле заголовка не должно быть пустым')
@@ -60,7 +66,7 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
 
     function submitForm(evt: SyntheticEvent) {
         evt.preventDefault()
-        if (ideaName && loadingStatus === LoadingStatuses.default) {
+        if (ideaName && ideaData.image && loadingStatus === LoadingStatuses.default) {
             const idea = {
                 tags: tagsData.filter(tag => tag.selected).map(tag => tag.id),
                 title: ideaName.replace(/"/g, ''),
@@ -68,13 +74,17 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
                 image: ideaData.image.split(',')[1]
             }
             changeLoadStatus(LoadingStatuses.loading)
-            dispatch(saveIdea(idea)).then(() => {
+            dispatch(saveIdea(idea)).then((error) => {
+                console.log(error)
                 changeLoadStatus(LoadingStatuses.loaded)
                 handleComplete()
             })
         }
         else if (!ideaName) {
             setError('Поле заголовка не должно быть пустым')
+        }
+        else if (!ideaData.image) {
+            setError('Чтобы сохранить задачу нужно сгенерировать изображение')
         }
     }
 
@@ -90,7 +100,6 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
         <form onSubmit={submitForm}>
             <label htmlFor="name">Заголовок</label>
             <input className={error ? 'error-field' : ''} disabled={isDataLoading} autoComplete="off" id="name" name="name" value={ideaName} onChange={handleIdeaName} onBlur={handleOnBlur}></input>
-            <p className="error">{error}</p>
             <label htmlFor="description">Описание</label>
             <textarea autoComplete="off" disabled={isDataLoading} id="description" name="description" value={description} onChange={handleDescription} onBlur={handleOnBlur}></textarea>
             <div className="flex-block">
@@ -119,6 +128,7 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
                     </ul>
                 </div>
             </div>
+            <p className="error">{error}</p>
             {!isDataLoading && !isImageLoading && <button className={loadingStatus}>{LoadingStatusesContent[loadingStatus]}</button>}
         </form>
     )

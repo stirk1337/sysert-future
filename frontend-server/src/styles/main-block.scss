@@ -25,27 +25,38 @@
     padding-top: 250px;
     padding-bottom: 250px;
     position: relative;
+    height: 1314px;
 
     .flex {
         display: flex;
         justify-content: space-between;
         gap: 10%;
 
+        img {
+            position: absolute;
+            top: 7%;
+            left: 36%;
+        }
+
         .text-block {
-            position: relative;
+            position: absolute;
+            height: 500px;
             padding-top: 44px;
+            width: 642px;
+            left: -10%;
+            top: 26%;
 
             &::after {
                 content: "";
                 position: absolute;
-                left: -10%;
-                top: -33%;
+                left: -9%;
+                top: -19%;
                 width: 120%;
                 height: 130%;
                 z-index: -1;
                 background-image: url('/background-main/background-1.jpg');
                 background-repeat: no-repeat;
-                background-size: cover;
+
             }
 
             p {

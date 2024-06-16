@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 import { AppDispatch, State } from "..";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setImageLoad } from "../action";
+import { setError, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setImageLoad } from "../action";
 import { getIdeas } from "./get-actions";
 
 export const generateIdea = createAsyncThunk<void, { like: string, want: string, can: string }, {
@@ -61,8 +61,8 @@ export const saveIdea = createAsyncThunk<void, { tags: string[], title: string, 
             }
             dispatch(setIdea(idea))
             dispatch(getIdeas())
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
+            dispatch(setError(error.response.data.error))
         }
     },
 );

@@ -208,19 +208,17 @@
     .questions-block {
         z-index: 4;
         position: fixed;
-        width: 160vh;
-        max-width: 1520px;
-        height: 90vh;
-        max-height: 860px;
+        width: auto;
+        width: 1041px;
         top: 50%;
         left: 50%;
-
         transform: translate(-50%, -50%);
         background-color: white;
         margin: 0 auto;
-        box-shadow: 0px 2.5919997692108154px 6.479999542236328px 2.5919997692108154px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 2.5919997692px 6.4799995422px 2.5919997692px rgba(0, 0, 0, 0.25);
         border-radius: 12.96px;
         overflow: hidden;
+        height: 620px;
 
         h2 {
             font-size: 1.5rem;
@@ -281,17 +279,24 @@
         }
 
         .question-content {
-            height: 95%;
+            max-height: 527px;
             overflow: auto;
             padding: 32px;
             text-align: center;
             justify-content: center;
             font-size: 1.25rem;
+            margin-bottom: 30px;
         }
 
         .flex {
             display: flex;
             justify-content: center;
+            text-align: left;
+
+            img {
+                max-width: 300px;
+                margin-left: 10px;
+            }
         }
 
         .questions {
@@ -307,7 +312,9 @@
 
         .buttons {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+            gap: 10%;
+            margin-bottom: 30px;
 
             button {
                 background: #00AD6F;

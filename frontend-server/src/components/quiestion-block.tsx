@@ -12,6 +12,7 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
     const [currentQuestion, setCurrentQuestion] = useState<SuccessDetectorBlock>(questions[0])
     const [currentBlockProgress, setCurrentBlockProgress] = useState<boolean[]>([])
     const [isAnswerClicked, setIsAnswerClicked] = useState(false)
+    const [currentAnswer, setCurrentAnswer] = useState('')
 
     useEffect(() => {
         const firstUncompleted = questions[0]
@@ -41,6 +42,7 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
             onFinish(currentBlockProgress.filter(question => question).length)
         }
         setIsAnswerClicked(false)
+        setCurrentAnswer('')
     }
 
     function changeProgress(questionIndex: number) {
@@ -53,12 +55,18 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
         if (questionIndex > 1) {
             setCurrentQuestion(questions[questionIndex - 2])
             setQuestionIndex(questionIndex - 1)
+            changeProgress(questionIndex)
         }
+        setIsAnswerClicked(false)
+        setCurrentAnswer('')
     }
 
-    function handleAnswer() {
+    function handleAnswer(evt: React.ChangeEvent<HTMLInputElement>) {
+        setCurrentAnswer(evt.target.value)
         setIsAnswerClicked(true)
     }
+
+    console.log(isAnswerClicked)
 
     return (
         <div className="questions-block">
@@ -74,9 +82,12 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
                     <div className="flex">
                         {currentQuestion.is_test && <div className="questions">
                             <h2>{currentQuestion.title}</h2>
-                            {currentQuestion.answer1 && <RadioButton key={1} id={'1'} onClick={handleAnswer} value={currentQuestion.answer1} name={"question"} />}
-                            {currentQuestion.answer2 && <RadioButton key={2} id={'2'} onClick={handleAnswer} value={currentQuestion.answer2} name={"question"} />}
-                            {currentQuestion.answer3 && <RadioButton key={3} id={'3'} onClick={handleAnswer} value={currentQuestion.answer3} name={"question"} />}
+                            {currentQuestion.answer1 && <RadioButton key={1} id={'1'} onClick={handleAnswer} value={currentQuestion.answer1} name={"question"} selectedAnswer={currentAnswer} />}
+                            {currentQuestion.answer2 && <RadioButton key={2} id={'2'} onClick={handleAnswer} value={currentQuestion.answer2} name={"question"} selectedAnswer={currentAnswer} />}
+                            {currentQuestion.answer3 && <RadioButton key={3} id={'3'} onClick={handleAnswer} value={currentQuestion.answer3} name={"question"} selectedAnswer={currentAnswer} />}
+                            {isAnswerClicked && <div>
+                                <p>{currentQuestion.after_test}</p>
+                            </div>}
                         </div>}
                         <div className="question-text">
                             <p dangerouslySetInnerHTML={{ __html: currentQuestion.description }}></p>

@@ -67,6 +67,10 @@
         padding: 32px;
         overflow: hidden;
 
+        .error {
+            margin: 0;
+        }
+
         &::after {
             content: "";
             position: absolute;
@@ -152,10 +156,6 @@
                 padding-left: 15px;
                 font-size: 1.25rem;
                 margin-bottom: 32px;
-
-                &.error-field {
-                    margin-bottom: 10px;
-                }
             }
 
             button {
@@ -170,7 +170,7 @@
                 text-align: center;
                 padding: 9px 28px;
                 height: 57px;
-                margin-top: 50px;
+                margin-top: 10px;
 
                 &.loaded {
                     cursor: default;
