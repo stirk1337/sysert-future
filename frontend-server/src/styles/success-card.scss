@@ -166,10 +166,12 @@
                 box-shadow: 0px 0px 2.9159996509552px 3.6449997425079346px rgba(0, 0, 0, 0.25) inset;
                 border-radius: 50%;
                 height: 120%;
-                align-content: center;
                 overflow: hidden;
                 width: 10%;
                 text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
                 p {
                     position: relative;
@@ -368,6 +370,34 @@
             display: flex;
             align-items: center;
             gap: 2%;
+        }
+
+        .wrong {
+            background-color: #FF3434;
+            border-radius: 19px;
+            color: white;
+
+            .radio-container::before {
+                border: 2px solid #FF3434;
+            }
+
+            input[type="radio"]:checked+label .radio-container::after {
+                background-color: #FF3434;
+            }
+        }
+
+        .correct {
+            background-color: #00AD6F;
+            border-radius: 19px;
+            color: white;
+
+            .radio-container::before {
+                border: 2px solid #00AD6F;
+            }
+
+            input[type="radio"]:checked+label .radio-container::after {
+                background-color: #00AD6F;
+            }
         }
     }
 

@@ -50,7 +50,7 @@ function IdeasBlock() {
     return (
         <section id="ideas" className={isCompleted ? 'completed' : ''}>
             <h2>Меняющие культуру идеи</h2>
-            <p>Добро пожаловать на биржу идей! Здесь любой человек может опубликовать собственную идею, а также посмотреть на идеи других людей и оценить их</p>
+            <p>Фраза, которая рассказывает, что в этом блоке находятся идеи, которые создали другие люди, и мотивация просмотреть и оценить их.</p>
             <div className="card-block-with-controls">
                 <div className="controls">
                     <img onClick={() => { changeCurrentCard(-1) }} src="arrow.svg"></img>
@@ -58,7 +58,7 @@ function IdeasBlock() {
                 </div>
                 {userData.id !== 0 &&
                     <div className="toggle-container">
-                        <button onClick={changeToggle} className="form-toggle">
+                        <button onClick={changeToggle} className={`form-toggle ${isUserCards ? 'user-cards' : 'all-cards'}`}>
                             <div className={`toggle ${isUserCards ? 'edit-mode' : 'ai-mode'}`}></div>
                         </button>
                         <p>Только свои идеи</p>

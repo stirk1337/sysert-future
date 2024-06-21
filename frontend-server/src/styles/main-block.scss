@@ -27,6 +27,11 @@
     position: relative;
     height: 1314px;
 
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
     .flex {
         display: flex;
         justify-content: space-between;
@@ -45,6 +50,11 @@
             width: 642px;
             left: -10%;
             top: 26%;
+
+            h2 {
+                margin-top: 30%;
+                font-size: 25px;
+            }
 
             &::after {
                 content: "";

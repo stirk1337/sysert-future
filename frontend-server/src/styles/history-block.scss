@@ -68,12 +68,12 @@
     .history-card {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(90deg, #279C93 0% 50%, #313131 50% 100%);
+        background: linear-gradient(90deg, #279C93 0% 60%, #313131 60% 100%);
 
         .puzzle-part {
             position: absolute;
             top: 0;
-            left: 45%;
+            left: 55%;
             width: 236px;
             height: 160px;
             z-index: 2;
@@ -90,7 +90,7 @@
 
         .card-info {
             padding: 0 55px;
-            width: 50%;
+            width: 70%;
 
             p {
                 font-family: Arial, Helvetica, sans-serif;
@@ -114,7 +114,7 @@
         }
 
         &:hover img {
-            left: 0;
+            left: 30px;
         }
     }
 }

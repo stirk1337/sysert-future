@@ -9,20 +9,19 @@ function HistoryBlock() {
 
     const [historyCards, setHistoryCards] = useState<HistoryData[]>([])
     const [isCompleted, setIsCompleted] = useState<string | null>(null)
+    const [isDragStarted, setDragStarted] = useState<boolean>(false)
 
     const historyData = useAppSelector((store) => store.history)
 
     useEffect(() => {
         dispatch(getHistoryData())
         setIsCompleted(localStorage.getItem('history'))
+        setHistoryCards(shuffleArray(historyData))
     }, [])
 
     useEffect(() => {
-        setHistoryCards(shuffleArray(historyData))
-    }, [historyData])
-
-    useEffect(() => {
-        if (isSortedAscending(historyCards)) {
+        console.log(isDragStarted)
+        if (isSortedAscending(historyCards) && !isDragStarted) {
             setHistoryCards(shuffleArray(historyData))
         }
     }, [historyCards])
@@ -38,6 +37,7 @@ function HistoryBlock() {
 
 
     function onDragEnd(result: DropResult) {
+        setDragStarted(true)
         const { source, destination } = result;
         if (!destination) return;
 
@@ -65,7 +65,7 @@ function HistoryBlock() {
         <div className="history-block">
             <section id="history" className={isCompleted ? 'completed' : ''}>
                 <h2>Как это было?</h2>
-                <p>Собери реку в правильном порядке и узнай больше о городе</p>
+                <p>Восстанови правильное течение истории градообразующего предприятия </p>
 
                 <DragDropContext onDragEnd={onDragEnd}>
                     <div className="constructor-list-block">

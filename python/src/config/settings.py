@@ -34,7 +34,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://sysert-ai.ru",
     "http://localhost:80",
     "http://localhost:81",
-    "https://555b-94-140-146-59.ngrok-free.app",
+    "https://9987-94-140-146-59.ngrok-free.app",
 ]
 # Application definition
 
@@ -77,7 +77,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:81",
     "http://localhost:80",
-    "https://555b-94-140-146-59.ngrok-free.app",
+    "https://9987-94-140-146-59.ngrok-free.app",
 ]
 
 TEMPLATES = [
