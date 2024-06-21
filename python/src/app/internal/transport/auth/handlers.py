@@ -89,10 +89,10 @@ class TelegramAuthView(APIView):
 
             user, _ = create_user(
                 auth_data["id"],
-                auth_data["username"],
-                auth_data["first_name"],
-                auth_data["last_name"],
-                auth_data["photo_url"],
+                auth_data.get('username', auth_data['id']),
+                auth_data.get('first_name', ''),
+                auth_data.get('last_name', ''),
+                auth_data.get('photo_url', None),
             )
 
             token, _ = Token.objects.get_or_create(user=user)
