@@ -47,9 +47,14 @@
         width: 120px;
         height: 56px;
         padding: 8px;
-        background: #FFD233;
+        background: #CDCDCD;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5) inset;
         border-radius: 50px;
+        transition: 1s;
+
+        &.user-cards {
+            background: #FFD233;
+        }
 
         .toggle {
             transition: all 1s;

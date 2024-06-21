@@ -13,6 +13,8 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
     const [currentBlockProgress, setCurrentBlockProgress] = useState<boolean[]>([])
     const [isAnswerClicked, setIsAnswerClicked] = useState(false)
     const [currentAnswer, setCurrentAnswer] = useState('')
+    const [questionsArray, setQuestionArray] = useState([currentQuestion.answer1, currentQuestion.answer2, currentQuestion.answer3])
+
 
     useEffect(() => {
         const firstUncompleted = questions[0]
@@ -20,6 +22,19 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
         setCurrentQuestion(firstUncompleted)
         setCurrentBlockProgress(questions.map(() => false))
     }, [])
+
+    useEffect(() => {
+        setQuestionArray(shuffleArray([currentQuestion.answer1, currentQuestion.answer2, currentQuestion.answer3]))
+    }, [currentQuestion.answer1, currentQuestion.answer2, currentQuestion.answer3])
+
+    function shuffleArray<T>(array: T[]): T[] {
+        const shuffledArray = [...array];
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
+        return shuffledArray;
+    }
 
     function handleClick(id: string) {
         const clickedQuestion = questions.find(question => question.id === id)
@@ -63,10 +78,9 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
 
     function handleAnswer(evt: React.ChangeEvent<HTMLInputElement>) {
         setCurrentAnswer(evt.target.value)
+
         setIsAnswerClicked(true)
     }
-
-    console.log(isAnswerClicked)
 
     return (
         <div className="questions-block">
@@ -82,9 +96,7 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
                     <div className="flex">
                         {currentQuestion.is_test && <div className="questions">
                             <h2>{currentQuestion.title}</h2>
-                            {currentQuestion.answer1 && <RadioButton key={1} id={'1'} onClick={handleAnswer} value={currentQuestion.answer1} name={"question"} selectedAnswer={currentAnswer} />}
-                            {currentQuestion.answer2 && <RadioButton key={2} id={'2'} onClick={handleAnswer} value={currentQuestion.answer2} name={"question"} selectedAnswer={currentAnswer} />}
-                            {currentQuestion.answer3 && <RadioButton key={3} id={'3'} onClick={handleAnswer} value={currentQuestion.answer3} name={"question"} selectedAnswer={currentAnswer} />}
+                            {questionsArray.map((question, index) => (question && <RadioButton isCorrect={question === currentQuestion.answer1} show={isAnswerClicked} key={index} id={String(index)} onClick={handleAnswer} value={question} name={"question"} selectedAnswer={currentAnswer} />))}
                             {isAnswerClicked && <div>
                                 <p>{currentQuestion.after_test}</p>
                             </div>}
@@ -95,7 +107,7 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
                     </div>
                 </div>
                 <div className="buttons">
-                    <button className="back" onClick={handleClickBackButton}>Назад</button>
+                    {questionIndex !== 1 && <button className="back" onClick={handleClickBackButton}>Назад</button>}
                     <button className="forward" onClick={handleClickNextButton}>{questionIndex === questions.length ? 'Завершить' : 'Дальше'}</button>
                 </div>
             </div>

@@ -120,7 +120,7 @@ function SuccessDetector() {
         <>
             <section id="success-block" className={isCompleted ? 'completed' : ''}>
                 <h2>Детектор успеха</h2>
-                <p>Выбери историю успеха и узнай, смог бы ты добится успеха!</p>
+                <p>Вокруг Завода появилось много инициатив. Представь себя на месте создателя одного из проектов и проверь, получилось ли у тебя повторить такой успех</p>
                 <div className="success-items-block">
                     <div className="items-carousel-block">
                         <div className="up-arrow">

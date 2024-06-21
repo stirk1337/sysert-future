@@ -18,13 +18,13 @@ function IdeaCard({ card, currentCard, handleComplete }: IdeaCardProps) {
     const [isLiked, setIsLiked] = useState(false)
 
     useEffect(() => {
-        if (card.likes.map((like) => like.id === String(userData.id)).length > 0) {
+        if (card.likes.filter((like) => String(like.id) === String(userData.id)).length > 0) {
             setIsLiked(true)
         }
         else {
             setIsLiked(false)
         }
-    }, [card])
+    }, [card, userData.id])
 
     function handleLikeClick() {
         if (userData.id === 0) {
