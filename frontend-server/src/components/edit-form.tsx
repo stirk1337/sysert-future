@@ -2,7 +2,7 @@ import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "./hooks"
 import { generateImage, saveIdea } from "./store/api-actions/post-actions"
 import { CircularProgress, Skeleton } from "@mui/material"
-import { changeTagStatus, setIdeaData } from "./store/action"
+import { changeTagStatus, setIdeaData, setIdeaSaved } from "./store/action"
 import { LoadingStatuses, LoadingStatusesContent } from "../enums"
 
 type EditFormProps = {
@@ -78,6 +78,11 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
                 console.log(error)
                 changeLoadStatus(LoadingStatuses.loaded)
                 handleComplete()
+                const element = document.getElementById('ideas');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+                dispatch(setIdeaSaved(true))
             })
         }
         else if (!ideaName) {

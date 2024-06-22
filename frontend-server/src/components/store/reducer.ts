@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeTagStatus, clearIdeaData, setAccessData, setError, setHistory, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setIdeas, setImageLoad, setModal, setTags, setUser } from './action';
+import { changeTagStatus, clearIdeaData, setAccessData, setError, setHistory, setIdea, setIdeaData, setIdeaImage, setIdeaLoad, setIdeaSaved, setIdeas, setImageLoad, setModal, setTags, setUser } from './action';
 
 type InitialState = {
     ideaIsLoading: boolean
@@ -12,6 +12,7 @@ type InitialState = {
     userData: UserData;
     history: HistoryData[];
     serverError: string;
+    isIdeaSaved: boolean;
 }
 
 const initialState: InitialState = {
@@ -36,7 +37,8 @@ const initialState: InitialState = {
         hash: ''
     },
     history: [],
-    serverError: ''
+    serverError: '',
+    isIdeaSaved: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -93,5 +95,8 @@ export const reducer = createReducer(initialState, (builder) => {
         })
         .addCase(setError, (state, action) => {
             state.serverError = action.payload
+        })
+        .addCase(setIdeaSaved, (state, action) => {
+            state.isIdeaSaved = action.payload;
         })
 });

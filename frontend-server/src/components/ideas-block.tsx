@@ -2,15 +2,16 @@ import { useEffect, useState } from "react"
 import IdeaCard from "./idea-card"
 import { useAppDispatch, useAppSelector } from "./hooks"
 import { getIdeas } from "./store/api-actions/get-actions"
+import { setIdeaSaved } from "./store/action"
 
 function IdeasBlock() {
     const dispatch = useAppDispatch()
     const ideasListData = useAppSelector((store) => store.ideas)
     const userData = useAppSelector((store) => store.userData)
+    const isIdeaSaved = useAppSelector((store) => store.isIdeaSaved)
 
     const [currentCard, setCurrentCard] = useState(0)
     const [blockPositions, setBlockPositions] = useState(-10)
-    const [isUserCards, setUserCards] = useState(false)
     const [ideasList, setIdeasList] = useState<IdeaExchange[]>(ideasListData)
     const [isCompleted, setIsCompleted] = useState<string | null>(null)
 
@@ -20,7 +21,7 @@ function IdeasBlock() {
     }, [])
 
     useEffect(() => {
-        if (isUserCards) {
+        if (isIdeaSaved) {
             const currentIdeaList = ideasListData.filter((idea) => idea.created_by === userData.id)
             console.log(currentIdeaList)
             setIdeasList(currentIdeaList)
@@ -28,7 +29,7 @@ function IdeasBlock() {
         else {
             setIdeasList(ideasListData)
         }
-    }, [ideasListData, isUserCards])
+    }, [ideasListData, isIdeaSaved])
 
     function changeCurrentCard(step: number) {
         if (currentCard + step < 0) {
@@ -39,7 +40,7 @@ function IdeasBlock() {
     }
 
     function changeToggle() {
-        setUserCards(!isUserCards)
+        dispatch(setIdeaSaved(!isIdeaSaved))
     }
 
     function handleComplete() {
@@ -58,8 +59,8 @@ function IdeasBlock() {
                 </div>
                 {userData.id !== 0 &&
                     <div className="toggle-container">
-                        <button onClick={changeToggle} className={`form-toggle ${isUserCards ? 'user-cards' : 'all-cards'}`}>
-                            <div className={`toggle ${isUserCards ? 'edit-mode' : 'ai-mode'}`}></div>
+                        <button onClick={changeToggle} className={`form-toggle ${isIdeaSaved ? 'user-cards' : 'all-cards'}`}>
+                            <div className={`toggle ${isIdeaSaved ? 'edit-mode' : 'ai-mode'}`}></div>
                         </button>
                         <p>Только свои идеи</p>
                     </div>
