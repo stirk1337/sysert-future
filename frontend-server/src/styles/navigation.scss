@@ -75,6 +75,7 @@ nav {
 
         .mobile-menu.active~ul {
             opacity: 1;
+            pointer-events: all;
         }
     }
 
@@ -92,6 +93,7 @@ nav {
         z-index: 3;
         opacity: 0;
         overflow: hidden;
+        pointer-events: none;
 
 
         li {
@@ -146,6 +148,7 @@ nav {
         }
 
         ul {
+            pointer-events: all;
             position: static;
             flex-direction: row;
             background-color: rgba(255, 255, 255, 0);

@@ -2,6 +2,8 @@
     position: relative;
 
     .background {
+        display: none;
+
         img {
             position: absolute;
             height: auto !important;
@@ -20,14 +22,18 @@
     }
 }
 
-
 #main {
+    position: relative;
+    height: fit-content;
     padding-top: 250px;
     padding-bottom: 250px;
-    position: relative;
-    height: 1314px;
 
     h1 {
+        position: absolute;
+        top: -10%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
         text-align: center;
         margin-top: 20px;
     }
@@ -39,24 +45,34 @@
 
         img {
             position: absolute;
-            top: 7%;
-            left: 36%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150vw;
+            max-width: 900px;
+            z-index: -1;
+            filter: brightness(60%);
         }
 
         .text-block {
-            position: absolute;
+            position: relative;
             height: 500px;
             padding-top: 44px;
-            width: 642px;
-            left: -10%;
+            width: 100%;
+            left: 0%;
             top: 26%;
 
             h2 {
-                margin-top: 30%;
-                font-size: 25px;
+                margin: 0 auto;
+                margin-top: 50%;
+                font-size: 1rem;
+                width: 50%;
+                padding-left: 20px;
+                min-width: 400px;
             }
 
             &::after {
+                display: none;
                 content: "";
                 position: absolute;
                 left: -9%;
@@ -76,6 +92,7 @@
     }
 
     &::before {
+        display: none;
         content: "";
         position: absolute;
         left: 70%;
@@ -86,5 +103,111 @@
         background-image: url('/background-main/background-2.jpg');
         background-repeat: no-repeat;
         background-size: cover;
+    }
+}
+
+@media (min-width: 600px) {
+    #main .flex .text-block h2 {
+        margin-top: 350px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .main-block {
+        .background {
+            display: inline-block;
+        }
+    }
+
+    #main {
+        height: 1314px;
+
+        h1 {
+            position: static;
+            transform: none;
+            color: black;
+            text-align: left;
+        }
+
+        .flex {
+            img {
+                position: absolute;
+                top: 7%;
+                left: 40%;
+                transform: none;
+                width: auto;
+                max-width: none;
+                z-index: 1;
+                width: 643.97px;
+                height: 420.48px;
+                filter: none;
+            }
+
+            .text-block {
+                position: absolute;
+                height: 500px;
+                padding-top: 44px;
+                padding-left: 20px;
+                width: 460px;
+                left: 2%;
+                top: 16%;
+
+                h2 {
+                    margin: 0;
+                    margin-top: 50%;
+                    font-size: 25px;
+                    width: 150%;
+                    padding-left: 0px;
+                    min-width: none;
+                }
+
+                &::after {
+                    display: inline-block;
+                    left: -9%;
+                    top: -2%;
+                    width: 100%;
+                    height: 50%;
+                    z-index: -1;
+                    background-size: contain;
+                }
+
+                p {
+                    font-size: 1.5em;
+                }
+            }
+        }
+
+        &::before {
+            display: inline-block;
+            left: 52%;
+            top: 29%;
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    #main {
+        height: 1314px;
+
+        .flex {
+            img {
+                top: 7%;
+                left: 40%;
+                width: 1207.44px;
+                height: 788.40px;
+            }
+
+            .text-block {
+                h2 {
+                    margin-top: 30%;
+                    width: 120%;
+                }
+            }
+        }
+
+        &::before {
+            left: 72%;
+            top: 56%;
+        }
     }
 }
