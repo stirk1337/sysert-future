@@ -95,3 +95,49 @@ html::-webkit-scrollbar {
     right: 0;
     background-color: black;
 }
+
+@media (min-width: 375px) {
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    section p {
+        font-size: 0.75rem;
+        padding: 10px;
+    }
+
+    section h2~p {
+        font-weight: bold;
+    }
+}
+
+@media (min-width: 1024px) {
+    section {
+        max-width: 1024px;
+    }
+
+    h2 {
+        margin-bottom: 37px;
+    }
+
+    section p {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    section h2~p {
+        width: 50%;
+        font-weight: normal;
+    }
+}
+
+@media (min-width: 1440px) {
+    section {
+        max-width: 1440px;
+    }
+
+    section p {
+        font-size: 1.25rem;
+        padding: 10px;
+    }
+}
