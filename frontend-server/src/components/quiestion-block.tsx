@@ -83,8 +83,6 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
         setIsAnswerClicked(true)
     }
 
-    console.log(currentBlockProgress[questionIndex - 1], questionIndex)
-
     return (
         <div className="questions-block">
             <div className="questions-menu">

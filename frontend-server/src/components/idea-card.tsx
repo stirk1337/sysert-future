@@ -5,11 +5,11 @@ import { likeIdea } from "./store/api-actions/post-actions";
 
 type IdeaCardProps = {
     card: IdeaExchange;
-    currentCard: number;
     handleComplete: () => void;
+    addRef: (ref: HTMLElement) => void;
 }
 
-function IdeaCard({ card, currentCard, handleComplete }: IdeaCardProps) {
+function IdeaCard({ card, handleComplete, addRef }: IdeaCardProps) {
     const dispatch = useAppDispatch()
 
     const tags = useAppSelector((store) => store.tags)
@@ -39,7 +39,7 @@ function IdeaCard({ card, currentCard, handleComplete }: IdeaCardProps) {
     }
 
     return (
-        <li className={currentCard === Number(card.id) ? 'active' : ''}>
+        <li ref={(el) => { addRef(el as HTMLElement) }}>
             <div className="likes-block">
                 <img onClick={handleLikeClick} src={isLiked ? "heart-liked.svg" : "heart.svg"}></img>
                 <p>{card.likes.length}</p>
