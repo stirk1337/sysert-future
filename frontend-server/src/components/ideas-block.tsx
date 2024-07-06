@@ -23,7 +23,7 @@ function IdeasBlock() {
     }, [])
 
     useEffect(() => {
-        if (isIdeaSaved) {
+        if (isIdeaSaved && userData.id !== 0) {
             const currentIdeaList = ideasListData.filter((idea) => idea.created_by === userData.id)
             console.log(currentIdeaList)
             setIdeasList(currentIdeaList)

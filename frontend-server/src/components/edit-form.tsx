@@ -121,7 +121,7 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
                                 <div className="progress">
                                     <CircularProgress />
                                 </div>
-                                <Skeleton animation="wave" variant="rectangular" width={391} height={223} />
+                                <Skeleton className="skeleton" animation="wave" variant="rectangular" />
                             </div>
                         }
                     </div>
