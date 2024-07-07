@@ -15,16 +15,12 @@ function HistoryBlock() {
 
     useEffect(() => {
         dispatch(getHistoryData())
-        setIsCompleted(localStorage.getItem('history'))
-        setHistoryCards(shuffleArray(historyData))
     }, [])
 
     useEffect(() => {
-        console.log(isDragStarted)
-        if (isSortedAscending(historyCards) && !isDragStarted) {
-            setHistoryCards(shuffleArray(historyData))
-        }
-    }, [historyCards])
+        setIsCompleted(localStorage.getItem('history'))
+        setHistoryCards(shuffleArray(historyData))
+    }, [historyData])
 
     function shuffleArray<T>(array: T[]): T[] {
         const shuffledArray = [...array];

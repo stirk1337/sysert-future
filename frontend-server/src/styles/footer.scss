@@ -35,3 +35,133 @@
         }
     }
 }
+
+@media (min-width: 375px) {
+    #footer {
+        max-width: 100%;
+        background: #313131;
+        color: white;
+        padding-top: 9px;
+        padding-bottom: 39px;
+        margin-bottom: 0;
+
+        .flex-box {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            justify-content: center;
+
+            img {
+                width: 100%;
+            }
+
+            .mobile-flex {
+                display: flex;
+                justify-content: space-between;
+                padding: 9px;
+            }
+
+            .contacts p {
+                font-size: 1rem;
+                padding-left: 0;
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 27px;
+        }
+
+        .media {
+            width: 100%;
+        }
+
+        .media p {
+            display: inline-block;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-left: 0;
+
+            a {
+                display: none;
+                font-family: Microsoft Sans Serif !important;
+                border-bottom: 1px solid white;
+            }
+
+            img {
+                width: 36px;
+                height: 36px;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    #footer {
+        padding-top: 67px;
+
+        .flex-box {
+            max-width: 100vw;
+            flex-direction: row;
+
+            .mobile-flex {
+                width: fit-content;
+                padding: 0;
+                gap: 20px;
+            }
+
+            .contacts p {
+                font-size: 1.1rem;
+                width: 100%;
+                padding-top: 0;
+            }
+        }
+
+        .sysert-projects {
+            width: 40%;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+        }
+
+        .media p {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-left: 0;
+            width: 100%;
+            gap: 10px;
+            padding-top: 0;
+
+            a {
+                display: inline-block;
+                font-family: Microsoft Sans Serif !important;
+                border-bottom: 1px solid white;
+            }
+
+            img {
+                width: 36px;
+                height: 36px;
+            }
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    #footer {
+        .flex-box {
+            .contacts p {
+                font-size: 1.5rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.6rem;
+        }
+    }
+}
