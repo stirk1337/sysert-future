@@ -27,6 +27,7 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
     useEffect(() => {
         setIdeaName(ideaData.title)
         setIdeaDescription(ideaData.description)
+        changeLoadStatus(LoadingStatuses.default)
     }, [ideaData])
 
     useEffect(() => {
