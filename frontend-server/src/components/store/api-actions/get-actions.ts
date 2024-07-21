@@ -64,6 +64,7 @@ export const getIdeas = createAsyncThunk<void, undefined, {
     async (__arg, { dispatch, extra: api }) => {
         try {
             const { data: ideas } = await api.get<IdeaExchange[]>('/idea/');
+            console.log(ideas);
             dispatch(setIdeas(ideas))
         } catch (error) {
             console.log(error);

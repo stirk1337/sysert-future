@@ -1,17 +1,19 @@
 nav {
     width: 100%;
     display: flex;
-    padding: 7px 32px;
+    padding: 2px;
     backdrop-filter: blur(10px);
-    font-size: 1.25em;
+    font-size: 1rem;
     position: fixed;
     background: rgba(255, 255, 255, 0.80);
     z-index: 3;
     justify-content: space-between;
 
     img {
-        background-color: cyan;
+        background-color: #91F5E9;
         border-radius: 50%;
+        width: 36px;
+        height: 36px;
         cursor: pointer;
     }
 
@@ -21,16 +23,16 @@ nav {
         margin-left: 20px;
 
         img {
-            width: 51px;
-            height: 51px;
+            width: 36px;
+            height: 36px;
         }
 
         .user-no-image {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 51px;
-            height: 51px;
+            width: 36px;
+            height: 36px;
             background-color: cyan;
             font-size: 2rem;
             border-radius: 50%;
@@ -39,24 +41,155 @@ nav {
 
     .header-container {
         display: flex;
+        flex-direction: row-reverse;
+
+        .mobile-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-self: center;
+            margin-right: 10px;
+
+            span {
+                transition: 0.3s all ease-in-out;
+                display: inline-block;
+                width: 24px;
+                border: 2px black solid;
+                border-radius: 20px;
+            }
+        }
+
+        .mobile-menu.active:nth-child(1) {
+            span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            span:nth-child(2) {
+                opacity: 0;
+            }
+
+            span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+
+        .mobile-menu.active~ul {
+            opacity: 1;
+            pointer-events: all;
+        }
     }
 
     ul {
+        transition: 0.3s all ease-in-out;
+        position: absolute;
+        right: 0;
+        top: 100%;
         display: flex;
         margin-left: auto;
         justify-content: end;
+        align-items: center;
+        flex-direction: column;
+        background-color: white;
+        z-index: 3;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+
 
         li {
             cursor: pointer;
+            border-top: 1px black solid;
+            width: 100%;
+            text-align: center;
 
             a {
                 display: inline-block;
-                padding: 11px;
+                padding: 19px;
             }
 
 
             &:hover {
                 background-color: lightgray;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    nav {
+        padding: 5px 27px;
+        font-size: 0.85rem;
+
+        img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .user-data {
+            img {
+                width: 42px;
+                height: 42px;
+            }
+
+            .user-no-image {
+                width: 42px;
+                height: 42px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: row;
+
+            .mobile-menu {
+                display: none;
+            }
+        }
+
+        ul {
+            pointer-events: all;
+            position: static;
+            flex-direction: row;
+            background-color: rgba(255, 255, 255, 0);
+            opacity: 1;
+
+            li {
+                border-top: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+
+                a {
+                    display: inline-block;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    nav {
+        padding: 10px 51px;
+        font-size: 1.3rem;
+
+        img {
+            width: 51px;
+            height: 51px;
+        }
+
+        .user-data {
+            img {
+                width: 51px;
+                height: 51px;
+            }
+
+            .user-no-image {
+                width: 51px;
+                height: 51px;
+                font-size: 1.3rem;
             }
         }
     }

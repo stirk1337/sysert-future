@@ -138,3 +138,15 @@
         }
     }
 }
+
+@media (min-width: 375px) {
+    #history {
+        display: none;
+    }
+}
+
+@media (min-width: 1440px) {
+    #history {
+        display: block;
+    }
+}

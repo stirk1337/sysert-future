@@ -43,6 +43,7 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
             changeProgress(questionIndex)
             setCurrentQuestion(clickedQuestion)
             setQuestionIndex(currentQuestionIndex)
+            setIsAnswerClicked(false)
         }
     }
 
@@ -96,8 +97,8 @@ function QuestionBlock({ questions, onFinish }: QuestionBlockProps) {
                     <div className="flex">
                         {currentQuestion.is_test && <div className="questions">
                             <h2>{currentQuestion.title}</h2>
-                            {questionsArray.map((question, index) => (question && <RadioButton isCorrect={question === currentQuestion.answer1} show={isAnswerClicked} key={index} id={String(index)} onClick={handleAnswer} value={question} name={"question"} selectedAnswer={currentAnswer} />))}
-                            {isAnswerClicked && <div>
+                            {questionsArray.map((question, index) => (question && <RadioButton isCorrect={question === currentQuestion.answer1} show={isAnswerClicked || currentBlockProgress[questionIndex - 1]} key={index} id={String(index)} onClick={handleAnswer} value={question} name={"question"} selectedAnswer={currentAnswer} />))}
+                            {(isAnswerClicked || currentBlockProgress[questionIndex - 1]) && <div>
                                 <p>{currentQuestion.after_test}</p>
                             </div>}
                         </div>}

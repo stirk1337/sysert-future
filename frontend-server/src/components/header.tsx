@@ -1,14 +1,21 @@
 import { Link } from 'react-scroll';
 import { useAppSelector } from './hooks';
+import { useState } from 'react';
 
 function Header() {
     const userData = useAppSelector((store) => store.userData)
+    const [isMobileMenuActive, setIsMobileMenuActive] = useState(false)
     console.log(userData);
     return (
         <header>
             <nav>
                 <Link to="main" smooth={true} duration={500}><img src="/logo.svg" alt="" width={51} height={51}></img></Link>
                 <div className='header-container'>
+                    <div className={`mobile-menu ${isMobileMenuActive ? "active" : ""}`} onClick={() => { setIsMobileMenuActive(!isMobileMenuActive) }}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                     <ul>
                         <li><Link to="history" smooth={true} duration={500}>Хроника</Link></li>
                         <li><Link to="success-block" smooth={true} duration={500}>Детектор успеха</Link></li>

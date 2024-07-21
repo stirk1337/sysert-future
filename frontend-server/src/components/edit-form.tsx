@@ -27,6 +27,7 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
     useEffect(() => {
         setIdeaName(ideaData.title)
         setIdeaDescription(ideaData.description)
+        changeLoadStatus(LoadingStatuses.default)
     }, [ideaData])
 
     useEffect(() => {
@@ -121,7 +122,7 @@ function EditForm({ loadingStatus, changeLoadStatus, handleComplete }: EditFormP
                                 <div className="progress">
                                     <CircularProgress />
                                 </div>
-                                <Skeleton animation="wave" variant="rectangular" width={391} height={223} />
+                                <Skeleton className="skeleton" animation="wave" variant="rectangular" />
                             </div>
                         }
                     </div>
