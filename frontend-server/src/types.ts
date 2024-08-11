@@ -77,3 +77,10 @@ type HistoryData = {
     date: string;
     image_url: string;
 }
+
+type SiteConfig = {
+    history: boolean;
+    success_detector: boolean;
+    idea_view: boolean;
+    idea_generate: boolean;
+}

@@ -29,3 +29,5 @@ export const setHistory = createAction<HistoryData[]>('idea/setHistory')
 export const setError = createAction<string>('idea/setError')
 
 export const setIdeaSaved = createAction<boolean>('idea/save')
+
+export const setConfig = createAction<SiteConfig>('site/setConfig')

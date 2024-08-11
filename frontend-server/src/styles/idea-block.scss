@@ -537,6 +537,12 @@
             }
         }
 
+        .ideas-list {
+            >li {
+                max-width: 465px;
+            }
+        }
+
         .form-toggle {
             position: relative;
             width: 120px;

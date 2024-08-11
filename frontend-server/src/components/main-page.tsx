@@ -7,7 +7,7 @@ import IdeasBlock from "./ideas-block"
 import MainBlock from "./main-block"
 import SuccessDetector from "./success-detector"
 import { useAppDispatch, useAppSelector } from "./hooks"
-import { getUser } from "./store/api-actions/get-actions"
+import { getSiteConfig, getUser } from "./store/api-actions/get-actions"
 import TelegramModal from "./telegram-modal"
 import { setModal } from "./store/action"
 
@@ -15,9 +15,11 @@ function MainPage() {
     const dispatch = useAppDispatch()
     const isModalOpen = useAppSelector((store) => store.isTelegramModalOpen)
     const userData = useAppSelector((store) => store.userData)
+    const siteConfig = useAppSelector((store) => store.siteConfig)
 
     useEffect(() => {
         dispatch(getUser())
+        dispatch(getSiteConfig())
     }, [])
 
     useEffect(() => {
@@ -36,10 +38,10 @@ function MainPage() {
             <Header />
             <main>
                 <MainBlock />
-                <HistoryBlock />
-                <SuccessDetector />
-                <IdeasBlock />
-                <GenerateIdeaBlock />
+                {siteConfig.history && <HistoryBlock />}
+                {siteConfig.success_detector && <SuccessDetector />}
+                {siteConfig.idea_view && <IdeasBlock />}
+                {siteConfig.idea_generate && <GenerateIdeaBlock />}
                 <Footer />
                 {isModalOpen &&
                     <>

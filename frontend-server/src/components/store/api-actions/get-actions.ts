@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppDispatch, State } from "..";
 import { AxiosInstance } from "axios";
-import { setAccessData, setHistory, setIdeas, setTags, setUser } from "../action";
+import { setAccessData, setConfig, setHistory, setIdeas, setTags, setUser } from "../action";
 
 export const getUser = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
@@ -99,6 +99,22 @@ export const getHistoryData = createAsyncThunk<void, undefined, {
         try {
             const { data: historyData } = await api.get<HistoryData[]>('/history/');
             dispatch(setHistory(historyData))
+        } catch (error) {
+            console.log(error);
+        }
+    },
+);
+
+export const getSiteConfig = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'idea/getIdeas',
+    async (__arg, { dispatch, extra: api }) => {
+        try {
+            const { data: configData } = await api.get<SiteConfig[]>('/get_site_conf/');
+            dispatch(setConfig(configData[0]))
         } catch (error) {
             console.log(error);
         }
