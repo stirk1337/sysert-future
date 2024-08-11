@@ -11,7 +11,7 @@ function Footer() {
                 <div className="mobile-flex">
                     <div className="contacts">
                         <h2>Контакты</h2>
-                        <p><a href="mailto:pagency1732@gmail.com">pagency1732@gmail.com</a></p>
+                        <p><a href="mailto:pagency1732@gmail.com">agency1732@gmail.com</a></p>
                         <p><a href="tel:+79827010685">+7 982 701 06 85</a></p>
                     </div>
                     <div className="media">
