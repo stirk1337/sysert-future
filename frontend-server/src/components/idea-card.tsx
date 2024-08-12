@@ -38,6 +38,15 @@ function IdeaCard({ card, handleComplete, addRef }: IdeaCardProps) {
         }
     }
 
+    function getTagTitle(currentTag: number) {
+        const tag = tags.filter((tag) => Number(tag.id) === currentTag)
+        if (tag.length > 0) {
+            return tag[0].title
+        }
+
+        return ""
+    }
+
     return (
         <li ref={(el) => { addRef(el as HTMLElement) }}>
             <div className="likes-block">
@@ -47,7 +56,7 @@ function IdeaCard({ card, handleComplete, addRef }: IdeaCardProps) {
             <img className="card-image" src={card.image}></img>
             <div className="idea-info">
                 <ul className="idea-tags">
-                    {tags && card.active_tags.map((currentTag) => <li key={currentTag}>{tags.filter((tag) => Number(tag.id) === currentTag)[0].title}</li>)}
+                    {tags && card.active_tags.map((currentTag) => <li key={currentTag}>{getTagTitle(currentTag)}</li>)}
                 </ul>
                 <div className="idea-data">
                     <h3>{card.title}</h3>
