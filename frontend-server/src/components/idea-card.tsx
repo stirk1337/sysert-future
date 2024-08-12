@@ -47,7 +47,7 @@ function IdeaCard({ card, handleComplete, addRef }: IdeaCardProps) {
             <img className="card-image" src={card.image}></img>
             <div className="idea-info">
                 <ul className="idea-tags">
-                    {card.active_tags.map((currentTag) => <li key={currentTag}>{tags.filter((tag) => Number(tag.id) === currentTag)[0].title}</li>)}
+                    {tags && card.active_tags.map((currentTag) => <li key={currentTag}>{tags.filter((tag) => Number(tag.id) === currentTag)[0].title}</li>)}
                 </ul>
                 <div className="idea-data">
                     <h3>{card.title}</h3>
