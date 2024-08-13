@@ -9,7 +9,6 @@ function HistoryBlock() {
 
     const [historyCards, setHistoryCards] = useState<HistoryData[]>([])
     const [isCompleted, setIsCompleted] = useState<string | null>(null)
-    const [isDragStarted, setDragStarted] = useState<boolean>(false)
 
     const historyData = useAppSelector((store) => store.history)
 
@@ -33,7 +32,6 @@ function HistoryBlock() {
 
 
     function onDragEnd(result: DropResult) {
-        setDragStarted(true)
         const { source, destination } = result;
         if (!destination) return;
 
